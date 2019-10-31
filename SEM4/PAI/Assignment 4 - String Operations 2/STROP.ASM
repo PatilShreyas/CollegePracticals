@@ -1,0 +1,135 @@
+PRINT MACRO M
+LEA DX,M
+MOV AH,09H
+INT 21H
+ENDM
+
+DATA SEGMENT
+MSGM DB 10,13,"------- MENU -------"
+     DB 10,13,"1.ENTER STRING 1"
+     DB 10,13,"2.ENTER STRING 2"
+     DB 10,13,"3.COMPARE"
+     DB 10,13,"4.CONCATENATE"
+     DB 10,13,"5.EXIT"
+     DB 10,13,"ENTER YOUR CHOICE : $"
+
+STR1 DB 20H
+     DB 0
+     DB 20 DUP(0)
+     DB '$'
+
+STR2 DB 20H
+     DB 0
+     DB 20 DUP(0)
+     DB '$'
+
+MSGEN1 DB 10,13,"ENTER STRING 1: $"
+MSGEN2 DB 10,13,"ENTER STRING 2: $"
+MSGEQL DB 10,13,"** STRINGS ARE EQUAL **$"
+MSGENEQL DB 10,13,"** STRINGS ARE NOT EQUAL **$"
+MSGCON DB 10,13,"CONCATENATED STRING :$"
+DATA ENDS
+
+CODE SEGMENT
+ASSUME CS:CODE ,DS:DATA
+MAIN:
+	MOV AX,DATA
+	MOV DS,AX
+	MOV ES,AX
+
+	MOV AX,02H
+	INT 10H
+
+Menu:   
+	PRINT MSGM
+	
+	MOV AH,01H
+	INT 21H
+
+	CMP AL,31H
+	JE Enter1
+	
+	CMP AL,32H
+	JE Enter2
+	
+	CMP AL,33H
+	JE Comp
+	
+	CMP AL,34H
+	JE Concat
+	
+	CMP AL,35H
+	JE Exit
+
+Enter1: 
+	Print MSGEN1
+	MOV AH,0AH
+	LEA DX,STR1
+	INT 21H
+	JMP Menu
+	
+Enter2: 
+	Print MSGEN2
+	MOV AH,0AH
+	LEA DX,STR2
+	INT 21H
+	JMP Menu
+
+Comp:   
+	CALL Compare
+	JMP Menu
+
+Concat: 
+	CALL Concatenate
+	JMP Menu
+
+Exit:   
+	MOV AH,4CH
+	INT 21H
+
+	;Procedure for compare
+
+	PROC Compare
+		LEA SI,STR1+2
+        LEA DI,STR2+2
+        MOV AL,[STR1+1]
+        MOV BL,[STR2+1]
+        MOV CL,[STR1+1]
+        INC CL
+
+	UP: 
+		MOV AL,[STR1+1]
+		CMP [STR2+1],AL
+		JNE NEXT
+		INC SI
+		INC DI
+		DEC CL
+		JNZ UP
+		PRINT MSGEQL
+		JMP NEXT2
+
+	NEXT :
+		 PRINT MSGENEQL
+
+	NEXT2:
+	RET
+	Compare ENDP
+
+	;Procedure for concatenation
+	Concatenate PROC
+	CLD
+	LEA SI,STR2+2
+	LEA DI,STR1+2
+	MOV BL,[STR1+1]
+	ADD DI,BX
+	MOV CL,[STR2+1]
+	REP MOVSB
+	PRINT MSGCON
+	PRINT STR1+2
+	RET
+	Concatenate ENDP
+
+CODE ENDS
+END MAIN
+
+

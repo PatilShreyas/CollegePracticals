@@ -1,0 +1,31 @@
+ORG 0X00
+LJUMP START
+
+
+DELAY:
+       MOV R0,#0X10
+	   MOV R1,#0X00
+
+  L1:  DJNZ R0,L1
+       DJNZ R1,L1
+	   RET
+
+ START:
+       MOV A,#0X00
+
+  L3: MOV P1,#0X01
+      LCALL DELAY
+
+      MOV P1,#0X04
+      LCALL DELAY
+
+
+      MOV P1,#0X02
+      LCALL DELAY
+
+      MOV P1,#0X08
+      LCALL DELAY
+
+  JMP l3
+
+ END
