@@ -1,0 +1,141 @@
+Create Database
+MySQL> CREATE TABLE CUSTOMER(CUST_ID INT PRIMARY KEY, CUST_NAME VARCHAR(30) NOT NULL, ADDRESS VARCHAR(20), ACCOUNT_BALANCE INT, ACCOUNT_OPENING_DATE DATE);
+Query OK, 0 rows affected (0.326 sec)
+
+MySQL> DESC CUSTOMER;
++----------------------+-------------+------+-----+---------+-------+
+| Field                | Type        | Null | Key | Default | Extra |
++----------------------+-------------+------+-----+---------+-------+
+| CUST_ID              | int(11)     | NO   | PRI | NULL    |       |
+| CUST_NAME            | varchar(30) | NO   |     | NULL    |       |
+| ADDRESS              | varchar(20) | YES  |     | NULL    |       |
+| ACCOUNT_BALANCE      | int(11)     | YES  |     | NULL    |       |
+| ACCOUNT_OPENING_DATE | date        | YES  |     | NULL    |       |
++----------------------+-------------+------+-----+---------+-------+
+5 rows in set (0.037 sec)
+
+CREATE BORROW TABLE
+MySQL> CREATE TABLE BORROW(LOAN_NO VARCHAR(5) PRIMARY KEY, CUST_ID INT, BRANCH_ID INT, AMOUNT INT);;
+Query OK, 0 rows affected (0.481 sec)
+
+ERROR: No query specified
+
+MySQL> DESC BORROW;
++-----------+------------+------+-----+---------+-------+
+| Field     | Type       | Null | Key | Default | Extra |
++-----------+------------+------+-----+---------+-------+
+| LOAN_NO   | varchar(5) | NO   | PRI | NULL    |       |
+| CUST_ID   | int(11)    | YES  |     | NULL    |       |
+| BRANCH_ID | int(11)    | YES  |     | NULL    |       |
+| AMOUNT    | int(11)    | YES  |     | NULL    |       |
++-----------+------------+------+-----+---------+-------+
+4 rows in set (0.066 sec)
+
+INSERT 10 RECORDS
+
+MySQL> MySQL> INSERT INTO CUSTOMER VALUES(1, 'Shreyas', 'Pune', 100000, '2019-07-29'),(2, 'Anil', 'Akurdi', 500000, '2019-07-30'),(3, 'Piyush', 'Nagpur', 10000, '2019-07-22'),(4, 'Aditya', 'Nigdi', 200000, '2019-07-19'),(5, 'Ankit', 'Mumbai', 25000, '2019-07-21'),(6, 'Patil', 'Pune', 105000, '2019-06-29'),(7, 'Yash', 'Pimpri Chinchwa', 90000, '2019-05-29'),(8, 'Shubham', 'Jalgaon', 30000, '2019-01-29'),(9, 'Varun', 'Pune', 1900000, '2018-07-29'),(10, 'Nilesh', 'Nashik', 1000, '2019-09-29');
+Query OK, 10 rows affected (0.127 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+
+MySQL> INSERT INTO BORROW VALUES('00111', 1, 1, 100000),('10111', 2, 2, 150000),('20111', 3, 3, 10000),('30111', 4, 9, 5000);
+Query OK, 4 rows affected (0.097 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+2. LIST
+MySQL> SELECT ID, NAME FROM CUSTOMER;
++----+---------+
+| ID | NAME    |
++----+---------+
+|  1 | Shreyas |
+|  2 | Anil    |
+|  3 | Piyush  |
+|  4 | Aditya  |
+|  5 | Ankit   |
+|  6 | Patil   |
+|  7 | Yash    |
+|  8 | Shubham |
+|  9 | Varun   |
+| 10 | Nilesh  |
++----+---------+
+10 rows in set (0.038 sec)
+
+3. DISPLAY
+MySQL> SELECT CUST_ID FROM DEPOSIT WHERE AMOUNT > 10000;
++---------+
+| CUST_ID |
++---------+
+| Shubham |
++---------+
+1 row in set (0.002 sec)
+
+4.
+MySQL> SELECT ACCOUNT_OPENING_DATE FROM CUSTOMER WHERE CUST_NAME='Anil';
++----------------------+
+| ACCOUNT_OPENING_DATE |
++----------------------+
+| 2019-07-30           |
++----------------------+
+1 row in set (0.002 sec)
+
+5.
+MySQL> SELECT CUST_ID FROM CUSTOMER WHERE OPEN_DATE > '01/01/2016';
++---------+
+| CUST_ID |
++---------+
+| Piyush  |
+| Ankit   |
+| Aditya  |
+| Shreyas |
+| Patil   |
+| Yash    |
+| Shubham |
+| Nilesh  |
+| Anil    |
++---------+
+9 rows in set, 1 warning (0.002 sec)
+
+7.
+MySQL> SELECT CUST_NAME FROM CUSTOMER WHERE CUST_NAME LIKE 'S%';
++-----------+
+| CUST_NAME |
++-----------+
+| Shreyas   |
+| Shubham   |
++-----------+
+2 rows in set (0.002 sec)
+
+9.
+MySQL> SELECT CUST_NAME FROM CUSTOMER WHERE LENGTH(CUST_NAME) = 5;
++-------+
+| NAME  |
++-------+
+| Ankit |
+| Patil |
+| Varun |
++-------+
+3 rows in set (0.027 sec)
+
+10.
+MySQL> SELECT CUST_ID, LOAN_NO, BRANCH_ID FROM BORROW;
++---------+---------+-----------+
+| CUST_ID | LOAN_NO | BRANCH_ID |
++---------+---------+-----------+
+|       1 | 00111   |         1 |
+|       2 | 10111   |         2 |
+|       3 | 20111   |         3 |
+|       4 | 30111   |         9 |
++---------+---------+-----------+
+4 rows in set (0.002 sec)
+
+14.
+MySQL> SELECT CUST_NAME, AMOUNT FROM CUSTOMER C, BORROW B WHERE C.CUST_ID=B.CUST_ID;
++-----------+--------+
+| CUST_NAME | AMOUNT |
++-----------+--------+
+| Shreyas   | 100000 |
+| Anil      | 150000 |
+| Piyush    |  10000 |
+| Aditya    |   5000 |
++-----------+--------+
+4 rows in set (0.002 sec)

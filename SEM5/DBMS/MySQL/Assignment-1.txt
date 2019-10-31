@@ -1,0 +1,148 @@
+CREATE DATABASE
+MySQL > CREATE DATABASE COLLEGE;
+Query OK, 1 row affected (0.003 sec)
+
+SHOW DATABASES
+MySQL > SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| college            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+6 rows in set (0.002 sec)
+
+USE DATABASE
+MySQL > USE COLLEGE
+Database changed
+MySQL>
+
+CREATE CUSTOMER TABLE
+MySQL> CREATE TABLE CUSTOMER (ID INT PRIMARY KEY, NAME VARCHAR(15) NOT NULL, CITY VARCHAR(10));
+Query OK, 0 rows affected (0.534 sec)
+
+DESCRIBE
+MySQL> DESC CUSTOMER;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| ID    | int(11)     | NO   | PRI | NULL    |       |
+| NAME  | varchar(15) | NO   |     | NULL    |       |
+| CITY  | varchar(10) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.017 sec)
+
+CREATE BRANCH TABLE
+MySQL> CREATE TABLE BRANCH (ID INT PRIMARY KEY, BNAME VARCHAR(15), CITY VARCHAR(10));
+Query OK, 0 rows affected (0.247 sec)
+
+DESCRIBE
+MySQL> DESC BRANCH;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| ID    | int(11)     | NO   | PRI | NULL    |       |
+| BNAME | varchar(15) | YES  |     | NULL    |       |
+| CITY  | varchar(10) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.009 sec)
+
+CREATE DEPOSIT TABLE
+MySQL> CREATE TABLE DEPOSIT (ACC_NUMBER VARCHAR(5) PRIMARY KEY, CUST_ID VARCHAR(10) NOT NULL, AMOUNT INT, BRANCH_ID VARCHAR(5), OPEN_DATE DATE);
+Query OK, 0 rows affected (0.535 sec)
+
+DESCRIBE:
+MySQL> DESC DEPOSIT;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| ACC_NUMBER | varchar(5)  | NO   | PRI | NULL    |       |
+| CUST_ID    | varchar(10) | NO   |     | NULL    |       |
+| AMOUNT     | int(11)     | YES  |     | NULL    |       |
+| BRANCH_ID  | varchar(5)  | YES  |     | NULL    |       |
+| OPEN_DATE  | date        | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.017 sec)
+
+CREATE BORROW TABLE
+MySQL> CREATE TABLE BORROW (LOAD_NO VARCHAR(5) PRIMARY KEY, CUST_ID VARCHAR(10), BRANCH_ID VARCHAR(5), AMOUNT INT);
+Query OK, 0 rows affected (0.282 sec)
+
+DESCRIBE:
+MySQL> DESC BORROW;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| LOAD_NO   | varchar(5)  | NO   | PRI | NULL    |       |
+| CUST_ID   | varchar(10) | YES  |     | NULL    |       |
+| BRANCH_ID | varchar(5)  | YES  |     | NULL    |       |
+| AMOUNT    | int(11)     | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.017 sec)
+
+Alert command
+Add address column in customer
+MySQL> ALTER TABLE CUSTOMER ADD ADDRESS VARCHAR(30);
+Query OK, 0 rows affected (0.088 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MySQL> DESC CUSTOMER;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| ID      | int(11)     | NO   | PRI | NULL    |       |
+| NAME    | varchar(15) | NO   |     | NULL    |       |
+| CITY    | varchar(10) | YES  |     | NULL    |       |
+| ADDRESS | varchar(30) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.009 sec)
+
+Modify column:
+MySQL> ALTER TABLE BRANCH CHANGE BNAME BRANCH_NAME VARCHAR(10);
+Query OK, 0 rows affected (0.902 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+Modify col name
+MySQL> ALTER TABLE CUSTOMER CHANGE ADDRESS NEW_ADDRESS VARCHAR(30);
+Query OK, 0 rows affected (0.111 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+DROP ADDRESS
+MySQL> ALTER TABLE CUSTOMER DROP NEW_ADDRESS;
+Query OK, 0 rows affected (0.571 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MySQL> DESC CUSTOMER;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| ID    | int(11)     | NO   | PRI | NULL    |       |
+| NAME  | varchar(15) | NO   |     | NULL    |       |
+| CITY  | varchar(10) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.010 sec)
+
+RENAME BRANCH
+MySQL> ALTER TABLE BRANCH RENAME TO BRANCH1;
+Query OK, 0 rows affected (0.294 sec)
+
+DCL ON TABLE
+GRANT
+MySQL> GRANT SELECT ON CUSTOMER TO SHREYAS;
+Query OK, 0 rows affected (0.013 sec)
+
+REVOKE
+MySQL> REVOKE SELECT ON CUSTOMER FROM SHREYAS;
+Query OK, 0 rows affected (0.002 sec)
+
+TRUNCATE
+MySQL> TRUNCATE CUSTOMER;
+Query OK, 0 rows affected (0.509 sec)
+
+DROP TABLE
+MySQL> DROP TABLE CUSTOMER;
+Query OK, 0 rows affected (0.229 sec)

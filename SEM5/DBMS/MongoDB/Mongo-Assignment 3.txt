@@ -1,0 +1,82 @@
+
+### Use of Limit();
+> db.movies.find().limit(2)
+{ "_id" : ObjectId("5d9230b196ed92291c07603c"), "name" : "Taare Zameen Par", "year" : 2005 }
+{ "_id" : ObjectId("5d9230d596ed92291c07603d"), "name" : "URI", "year" : 2018 }
+
+
+### Use of Find
+> db.movies.find()
+{ "_id" : ObjectId("5d9230b196ed92291c07603c"), "name" : "Taare Zameen Par", "year" : 2005 }
+{ "_id" : ObjectId("5d9230d596ed92291c07603d"), "name" : "URI", "year" : 2018 }
+{ "_id" : ObjectId("5d9230e596ed92291c07603e"), "name" : "Kalank", "year" : 2019 }
+{ "_id" : ObjectId("5d9230f396ed92291c07603f"), "name" : "Jab We Met", "year" : 2007 }
+{ "_id" : ObjectId("5d92311e96ed92291c076040"), "name" : "Bahubali 2", "year" : 2017 }
+{ "_id" : ObjectId("5d92312a96ed92291c076041"), "name" : "Bahubali", "year" : 2016 }
+
+
+### Use of limit and Skip()
+> db.movies.find({"year":2019}).limit(2)
+{ "_id" : ObjectId("5d9230e596ed92291c07603e"), "name" : "Kalank", "year" : 2019 }
+{ "_id" : ObjectId("5d9235e280e374291c194383"), "name" : "Chhichore", "year" : 2019 }
+> db.movies.find({"year":2019}).limit(2).skip(1)
+{ "_id" : ObjectId("5d9235e280e374291c194383"), "name" : "Chhichore", "year" : 2019 }
+{ "_id" : ObjectId("5d92361080e374291c194384"), "name" : "Dream Girl", "year" : 2019 }
+> db.movies.find({"year":2019}).limit(2).skip(2)
+{ "_id" : ObjectId("5d92361080e374291c194384"), "name" : "Dream Girl", "year" : 2019 }
+
+
+### Use of Skip()
+> db.movies.find({"year":2019}).skip(1)
+{ "_id" : ObjectId("5d9235e280e374291c194383"), "name" : "Chhichore", "year" : 2019 }
+{ "_id" : ObjectId("5d92361080e374291c194384"), "name" : "Dream Girl", "year" : 2019 }
+
+### Use of Sorting in Descending Order
+> db.movies.find().sort({"year":-1})
+{ "_id" : ObjectId("5d9230e596ed92291c07603e"), "name" : "Kalank", "year" : 2019 }
+{ "_id" : ObjectId("5d9235e280e374291c194383"), "name" : "Chhichore", "year" : 2019 }
+{ "_id" : ObjectId("5d92361080e374291c194384"), "name" : "Dream Girl", "year" : 2019 }
+{ "_id" : ObjectId("5d9230d596ed92291c07603d"), "name" : "URI", "year" : 2018 }
+{ "_id" : ObjectId("5d92311e96ed92291c076040"), "name" : "Bahubali 2", "year" : 2017 }
+{ "_id" : ObjectId("5d92312a96ed92291c076041"), "name" : "Bahubali", "year" : 2016 }
+{ "_id" : ObjectId("5d9230f396ed92291c07603f"), "name" : "Jab We Met", "year" : 2007 }
+{ "_id" : ObjectId("5d9230b196ed92291c07603c"), "name" : "Taare Zameen Par", "year" : 2005 }
+
+
+### Use of Sorting in Ascending Order
+> db.movies.find().sort({"year":1})
+{ "_id" : ObjectId("5d9230b196ed92291c07603c"), "name" : "Taare Zameen Par", "year" : 2005 }
+{ "_id" : ObjectId("5d9230f396ed92291c07603f"), "name" : "Jab We Met", "year" : 2007 }
+{ "_id" : ObjectId("5d92312a96ed92291c076041"), "name" : "Bahubali", "year" : 2016 }
+{ "_id" : ObjectId("5d92311e96ed92291c076040"), "name" : "Bahubali 2", "year" : 2017 }
+{ "_id" : ObjectId("5d9230d596ed92291c07603d"), "name" : "URI", "year" : 2018 }
+{ "_id" : ObjectId("5d9230e596ed92291c07603e"), "name" : "Kalank", "year" : 2019 }
+{ "_id" : ObjectId("5d9235e280e374291c194383"), "name" : "Chhichore", "year" : 2019 }
+{ "_id" : ObjectId("5d92361080e374291c194384"), "name" : "Dream Girl", "year" : 2019 }
+
+
+### Use of Where less than
+> db.movies.find({"year":{$lt:2010}})
+{ "_id" : ObjectId("5d9230b196ed92291c07603c"), "name" : "Taare Zameen Par", "year" : 2005 }
+{ "_id" : ObjectId("5d9230f396ed92291c07603f"), "name" : "Jab We Met", "year" : 2007 }
+
+### Use of Not Where greater than
+> db.movies.find({"year":{$gt:2010}})
+{ "_id" : ObjectId("5d9230d596ed92291c07603d"), "name" : "URI", "year" : 2018 }
+{ "_id" : ObjectId("5d9230e596ed92291c07603e"), "name" : "Kalank", "year" : 2019 }
+{ "_id" : ObjectId("5d92311e96ed92291c076040"), "name" : "Bahubali 2", "year" : 2017 }
+{ "_id" : ObjectId("5d92312a96ed92291c076041"), "name" : "Bahubali", "year" : 2016 }
+{ "_id" : ObjectId("5d9235e280e374291c194383"), "name" : "Chhichore", "year" : 2019 }
+{ "_id" : ObjectId("5d92361080e374291c194384"), "name" : "Dream Girl", "year" : 2019 }
+
+
+### Use of Not Where Not Equals to
+> db.movies.find({"year":{$ne:2019}})
+{ "_id" : ObjectId("5d9230b196ed92291c07603c"), "name" : "Taare Zameen Par", "year" : 2005 }
+{ "_id" : ObjectId("5d9230d596ed92291c07603d"), "name" : "URI", "year" : 2018 }
+{ "_id" : ObjectId("5d9230f396ed92291c07603f"), "name" : "Jab We Met", "year" : 2007 }
+{ "_id" : ObjectId("5d92311e96ed92291c076040"), "name" : "Bahubali 2", "year" : 2017 }
+{ "_id" : ObjectId("5d92312a96ed92291c076041"), "name" : "Bahubali", "year" : 2016 }
+
+
+

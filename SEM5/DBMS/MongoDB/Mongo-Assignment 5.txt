@@ -1,0 +1,205 @@
+
+### Use of Aggregate Function:
+> db.collection1.aggregate([{$match:{Status:"A"}},{$group:{_id:"$Cust_Id",total:{$sum:"$Amount"}}}])
+{ "_id" : "A123", "total" : 750 }
+
+
+### Insert using for() loop:
+> for(var i=1;i<100000;i++){db.collection3.insert({"Id":i,"Name":"Piyush"})}
+WriteResult({ "nInserted" : 1 })
+> db.collection3.find().pretty()
+{
+        "_id" : ObjectId("5d8f423263372b0316ea5f87"),
+        "Id" : 1,
+        "Name" : "Piyush"
+}
+{
+        "_id" : ObjectId("5d8f423363372b0316ea5f88"),
+        "Id" : 2,
+        "Name" : "Piyush"
+}
+{
+        "_id" : ObjectId("5d8f423363372b0316ea5f89"),
+        "Id" : 3,
+        "Name" : "Piyush"
+}
+{
+        "_id" : ObjectId("5d8f423363372b0316ea5f8a"),
+        "Id" : 4,
+        "Name" : "Piyush"
+}
+{
+        "_id" : ObjectId("5d8f423363372b0316ea5f8b"),
+        "Id" : 5,
+        "Name" : "Piyush"
+}
+{
+        "_id" : ObjectId("5d8f423363372b0316ea5f8c"),
+        "Id" : 6,
+        "Name" : "Piyush"
+}
+{
+        "_id" : ObjectId("5d8f423363372b0316ea5f8d"),
+        "Id" : 7,
+        "Name" : "Piyush"
+}
+{
+        "_id" : ObjectId("5d8f423363372b0316ea5f8e"),
+        "Id" : 8,
+        "Name" : "Piyush"
+}
+{
+        "_id" : ObjectId("5d8f423363372b0316ea5f8f"),
+        "Id" : 9,
+        "Name" : "Piyush"
+}
+{
+        "_id" : ObjectId("5d8f423363372b0316ea5f90"),
+        "Id" : 10,
+        "Name" : "Piyush"
+}
+{
+        "_id" : ObjectId("5d8f423363372b0316ea5f91"),
+        "Id" : 11,
+        "Name" : "Piyush"
+}
+{
+        "_id" : ObjectId("5d8f423363372b0316ea5f92"),
+        "Id" : 12,
+        "Name" : "Piyush"
+}
+{
+        "_id" : ObjectId("5d8f423363372b0316ea5f93"),
+        "Id" : 13,
+        "Name" : "Piyush"
+}
+{
+        "_id" : ObjectId("5d8f423363372b0316ea5f94"),
+        "Id" : 14,
+        "Name" : "Piyush"
+}
+{
+        "_id" : ObjectId("5d8f423363372b0316ea5f95"),
+        "Id" : 15,
+        "Name" : "Piyush"
+}
+{
+        "_id" : ObjectId("5d8f423363372b0316ea5f96"),
+        "Id" : 16,
+        "Name" : "Piyush"
+}
+{
+        "_id" : ObjectId("5d8f423363372b0316ea5f97"),
+        "Id" : 17,
+        "Name" : "Piyush"
+}
+{
+        "_id" : ObjectId("5d8f423363372b0316ea5f98"),
+        "Id" : 18,
+        "Name" : "Piyush"
+}
+{
+        "_id" : ObjectId("5d8f423363372b0316ea5f99"),
+        "Id" : 19,
+        "Name" : "Piyush"
+}
+{
+        "_id" : ObjectId("5d8f423363372b0316ea5f9a"),
+        "Id" : 20,
+        "Name" : "Piyush"
+}
+Type "it" for more
+
+### Find specific index
+> db.collection3.find({"Id":5}).pretty()
+{
+        "_id" : ObjectId("5d8f423363372b0316ea5f8b"),
+        "Id" : 5,
+        "Name" : "Piyush"
+}
+
+### Find first record
+> db.collection3.findOne({"Id":5})
+{
+        "_id" : ObjectId("5d8f423363372b0316ea5f8b"),
+        "Id" : 5,
+        "Name" : "Piyush"
+}
+
+### Ensure Indexes
+> db.collection3.ensureIndex({"Id":5})
+{
+        "createdCollectionAutomatically" : false,
+        "numIndexesBefore" : 1,
+        "numIndexesAfter" : 2,
+        "ok" : 1
+}
+
+### Use of findOne()
+> db.collection3.findOne({"Id":5000})
+{
+        "_id" : ObjectId("5d8f423663372b0316ea730e"),
+        "Id" : 5000,
+        "Name" : "Piyush"
+}
+
+### Get Indexes
+> db.collection3.getIndexes()
+[
+        {
+                "v" : 2,
+                "key" : {
+                        "_id" : 1
+                },
+                "name" : "_id_",
+                "ns" : "College.collection3"
+        },
+        {
+                "v" : 2,
+                "key" : {
+                        "Id" : 5
+                },
+                "name" : "Id_5",
+                "ns" : "College.collection3"
+        }
+]
+> db.collection3.getIndexKeys()
+[ { "_id" : 1 }, { "Id" : 5 } ]
+> db.collection3.getIndexKeys()
+[ { "_id" : 1 }, { "Id" : 5 } ]
+> db.collection3.getIndexSpecs()
+[
+        {
+                "v" : 2,
+                "key" : {
+                        "_id" : 1
+                },
+                "name" : "_id_",
+                "ns" : "College.collection3"
+        },
+        {
+                "v" : 2,
+                "key" : {
+                        "Id" : 5
+                },
+                "name" : "Id_5",
+                "ns" : "College.collection3"
+        }
+]
+
+### Drop indexes
+> db.collection3.dropIndex({"Id":5})
+{ "nIndexesWas" : 2, "ok" : 1 }
+
+
+> db.collection3.dropIndexes()
+{
+        "nIndexesWas" : 1,
+        "msg" : "non-_id indexes dropped for collection",
+        "ok" : 1
+}
+
+### Get Indexe Keys
+> db.collection3.getIndexKeys()
+[ { "_id" : 1 } ]
+>

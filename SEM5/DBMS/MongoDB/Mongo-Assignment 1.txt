@@ -1,0 +1,262 @@
+
+> use shreyas
+switched to db shreyas
+
+> show dbs
+admin  (empty)
+local  0.078GB
+mydb   0.078GB
+
+
+> db.student.insert({"rollNo" : 1, "name" : "Shreyas Patil"})
+WriteResult({ "nInserted" : 1 })
+
+> db.student.find()
+{ "_id" : ObjectId("5d808c84626bf04436a5d5fb"), "rollNo" : 1, "name" : "Shreyas Patil" }
+
+> db.student.find().pretty()
+{
+	"_id" : ObjectId("5d808c84626bf04436a5d5fb"),
+	"rollNo" : 1,
+	"name" : "Shreyas Patil"
+}
+> 
+> 
+> show collections
+student
+system.indexes
+
+> show dbs
+admin    (empty)
+local    0.078GB
+mydb     0.078GB
+shreyas  0.078GB
+> 
+> 
+> 
+> 
+> db.student.insert([)
+...     {
+...       "rollNo" : 2,
+...       "name" : "Shreyas Patil",
+...       "branch" : "IT"
+...     },
+...     {
+...       "rollNo" : 3,
+...       "name" : "Piyush Rajput",
+...       "branch" : "IT"
+...     },
+...     {
+...       "rollNo" : 4,
+...       "name" : "Aditya Pandit",
+...       "branch" : "CO"
+...     }
+...   ]
+
+> 
+> 
+> db.student.insert([{"rollNo": 2}])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 1,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> db.student.insert([{"rollNo": 3}, {"rollNo": 4, "name": "Piyush"}])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 2,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> db.student.find().pretty()
+{
+	"_id" : ObjectId("5d808c84626bf04436a5d5fb"),
+	"rollNo" : 1,
+	"name" : "Shreyas Patil"
+}
+{ "_id" : ObjectId("5d808db6626bf04436a5d5fc"), "rollNo" : 2 }
+{ "_id" : ObjectId("5d808dcd626bf04436a5d5fd"), "rollNo" : 3 }
+{
+	"_id" : ObjectId("5d808dcd626bf04436a5d5fe"),
+	"rollNo" : 4,
+	"name" : "Piyush"
+}
+
+> db.student.save({"_id" : ObjectId("5d808dcd626bf04436a5d5fe"), "rollNo":5, "name":"Piyush Rajput"})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+
+> db.student.find().pretty()
+{
+	"_id" : ObjectId("5d808c84626bf04436a5d5fb"),
+	"rollNo" : 1,
+	"name" : "Shreyas Patil"
+}
+{ "_id" : ObjectId("5d808db6626bf04436a5d5fc"), "rollNo" : 2 }
+{ "_id" : ObjectId("5d808dcd626bf04436a5d5fd"), "rollNo" : 3 }
+{
+	"_id" : ObjectId("5d808dcd626bf04436a5d5fe"),
+	"rollNo" : 5,
+	"name" : "Piyush Rajput"
+}
+
+
+> db.createCollection( "employee",
+... {
+... validator: { $and: [
+... { phone: { $type: "string" } },
+... { email: { $regex: /@mongodb\.com$/ } },
+... { status: { $in: [ "Manager", "CEO" ] } }
+... ]
+... },
+... validationAction: "error"
+... }
+... )
+{ "ok" : 1 }
+> db.employee.insert( { name: "Shreyas", status: "Worker" } )
+WriteResult({ "nInserted" : 1 })
+
+
+> db.employee.find().pretty()
+{
+	"_id" : ObjectId("5d808e92626bf04436a5d5ff"),
+	"name" : "Shreyas",
+	"status" : "Worker"
+}
+> db.employee.insert( { name: "Shreyas", status: "Manager" } )
+WriteResult({ "nInserted" : 1 })
+> db.employee.find().pretty()
+{
+	"_id" : ObjectId("5d808e92626bf04436a5d5ff"),
+	"name" : "Shreyas",
+	"status" : "Worker"
+}
+{
+	"_id" : ObjectId("5d808ecf626bf04436a5d600"),
+	"name" : "Shreyas",
+	"status" : "Manager"
+}
+
+
+> db.employee.remove({"status":"manager"})
+WriteResult({ "nRemoved" : 0 })
+
+
+> db.employee.remove({"status":"Manager"})
+WriteResult({ "nRemoved" : 1 })
+
+
+> db.employee.find().pretty()
+{
+	"_id" : ObjectId("5d808e92626bf04436a5d5ff"),
+	"name" : "Shreyas",
+	"status" : "Worker"
+}
+
+
+> db.student.update({"rollNo":5}, {$set: {"rollNo": 6}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.student.find().pretty()
+{
+	"_id" : ObjectId("5d808c84626bf04436a5d5fb"),
+	"rollNo" : 1,
+	"name" : "Shreyas Patil"
+}
+{ "_id" : ObjectId("5d808db6626bf04436a5d5fc"), "rollNo" : 2 }
+{ "_id" : ObjectId("5d808dcd626bf04436a5d5fd"), "rollNo" : 3 }
+{
+	"_id" : ObjectId("5d808dcd626bf04436a5d5fe"),
+	"rollNo" : 6,
+	"name" : "Piyush Rajput"
+}
+
+
+> db.student.update({"rollNo":5}, {$set: {"rollNo": 6, "name": "Piyush R Rajput"}})
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+
+> db.student.update({"rollNo":6}, {$set: {"rollNo": 6, "name": "Piyush R Rajput"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+db.movies.replaceOne(
+{"name": "URI"}, 
+{"name": "URI - The Surgical Strike", "releaseYear":"2019"}
+);
+
+> db.movies.find().pretty();                                                                                                                           
+{                                                                                                                                                      
+        "_id" : ObjectId("5d91fa21863741494b62f199"),                                                                                                  
+        "name" : "3 Idiots",                                                                                                                           
+        "releaseYear" : "2009"                                                                                                                         
+}                                                                                                                                                      
+{                                                                                                                                                      
+        "_id" : ObjectId("5d91fa21863741494b62f19a"),                                                                                                  
+        "name" : "Kalank",                                                                                                                             
+        "releaseYear" : "2019"                                                                                                                         
+}                                                                                                                                                      
+{                                                                                                                                                      
+        "_id" : ObjectId("5d91fa21863741494b62f19b"),                                                                                                  
+        "name" : "URI - The Surgical Strike",                                                                                                          
+        "releaseYear" : "2019"                                                                                                                         
+}
+
+
+##Upsert Replace
+> db.movies.replaceOne(                                                                                                                                
+...                                                                                                                                                    
+... {"name": "URI - The Surgical Strike"},                                                                                                             
+...                                                                                                                                                    
+... {"name": "URI - Surgical Strike", "releaseYear":"2019"},                                                                                           
+...                                                                                                                                                    
+... { upsert: true }                                                                                                                                   
+...                                                                                                                                                    
+... );                                                                                                                                                 
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }                                                                                     
+> db.movies.find().pretty();                                                                                                                           
+{                                                                                                                                                      
+        "_id" : ObjectId("5d91fa21863741494b62f199"),                                                                                                  
+        "name" : "3 Idiots",                                                                                                                           
+        "releaseYear" : "2009"                                                                                                                         
+}                                                                                                                                                      
+{                                                                                                                                                      
+        "_id" : ObjectId("5d91fa21863741494b62f19a"),                                                                                                  
+        "name" : "Kalank",                                                                                                                             
+        "releaseYear" : "2019"                                                                                                                         
+}                                                                                                                                                      
+{                                                                                                                                                      
+        "_id" : ObjectId("5d91fa21863741494b62f19b"),                                                                                                  
+        "name" : "URI - Surgical Strike",                                                                                                              
+        "releaseYear" : "2019"                                                                                                                         
+}                                                                                                                                                      
+
+
+## Update Many
+> db.movies.updateMany(  { releaseYear: { $gt: 2015 } },  { $set: { "New" : true } }  );                                                               
+{ "acknowledged" : true, "matchedCount" : 2, "modifiedCount" : 1 }                                                                                     
+> db.movies.find().pretty();                                                                                                                           
+{                                                                                                                                                      
+        "_id" : ObjectId("5d91fe46b6d3e45355927e7c"),                                                                                                  
+        "name" : "3 Idiots",                                                                                                                           
+        "releaseYear" : 2009                                                                                                                           
+}                                                                                                                                                      
+{                                                                                                                                                      
+        "_id" : ObjectId("5d91fe46b6d3e45355927e7d"),                                                                                                  
+        "name" : "Kalank",                                                                                                                             
+        "releaseYear" : 2019,                                                                                                                          
+        "New" : true                                                                                                                                   
+}                                                                                                                                                      
+{                                                                                                                                                      
+        "_id" : ObjectId("5d91fe46b6d3e45355927e7e"),                                                                                                  
+        "name" : "URI",                                                                                                                                
+        "releaseYear" : 2019,                                                                                                                          
+        "New" : true                                                                                                                                   
+}                                                                                                                                                      
+

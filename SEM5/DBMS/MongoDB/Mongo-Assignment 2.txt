@@ -1,0 +1,77 @@
+
+#### Find Values
+> db.student.find().pretty()
+{
+        "_id" : ObjectId("5d922ef53e64879d3a12459e"),
+        "rollNo" : 1,
+        "name" : "Piyush Rajput"
+}
+{
+        "_id" : ObjectId("5d922ef53e64879d3a12459f"),
+        "rollNo" : 2,
+        "name" : "Shreyas Patil"
+}
+{
+        "_id" : ObjectId("5d922f0f3e64879d3a1245a0"),
+        "rollNo" : 3,
+        "name" : "Jagruti Patil"
+}
+{
+        "_id" : ObjectId("5d922f0f3e64879d3a1245a1"),
+        "rollNo" : 4,
+        "name" : "Manisha Patil"
+}
+
+### Find One Value
+> db.student.findOne()
+{
+        "_id" : ObjectId("5d922ef53e64879d3a12459e"),
+        "rollNo" : 1,
+        "name" : "Piyush Rajput"
+}
+
+
+### Find One Value with specified value
+> db.student.findOne({"rollNo":4})
+{
+        "_id" : ObjectId("5d922f0f3e64879d3a1245a1"),
+        "rollNo" : 4,
+        "name" : "Manisha Patil"
+}
+
+### Use of AND opeator
+
+> db.student.find({$and: [{"rollNo":1},{"name":"Piyush Rajput"}]})
+{ "_id" : ObjectId("5d922ef53e64879d3a12459e"), "rollNo" : 1, "name" : "Piyush Rajput" }
+
+
+### Use of OR Operator
+> db.student.find({$or: [{"rollNo":1}, {"rollNo":3}]})
+{ "_id" : ObjectId("5d922ef53e64879d3a12459e"), "rollNo" : 1, "name" : "Piyush Rajput" }
+{ "_id" : ObjectId("5d922f0f3e64879d3a1245a0"), "rollNo" : 3, "name" : "Jagruti Patil" }
+
+
+### Use of Greater than Operator
+
+> db.movies.find({"year":{$gt:2010}})
+{ "_id" : ObjectId("5d9230d596ed92291c07603d"), "name" : "URI", "year" : 2018 }
+{ "_id" : ObjectId("5d9230e596ed92291c07603e"), "name" : "Kalank", "year" : 2019 }
+{ "_id" : ObjectId("5d92311e96ed92291c076040"), "name" : "Bahubali 2", "year" : 2017 }
+{ "_id" : ObjectId("5d92312a96ed92291c076041"), "name" : "Bahubali", "year" : 2016 }
+
+
+### Use of AND and OR together.
+
+> db.movies.find({"year":{$gt:2010}, $or:[{"name":"Bahubali"}]})
+{ "_id" : ObjectId("5d92312a96ed92291c076041"), "name" : "Bahubali", "year" : 2016 }
+>
+
+### Use of NOT Operator
+> db.movies.find({"year":{$not:{$gt:2010}}})
+{ "_id" : ObjectId("5d9230b196ed92291c07603c"), "name" : "Taare Zameen Par", "year" : 2005 }
+{ "_id" : ObjectId("5d9230f396ed92291c07603f"), "name" : "Jab We Met", "year" : 2007 }
+
+
+
+
+

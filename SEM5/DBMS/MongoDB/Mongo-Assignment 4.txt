@@ -1,0 +1,63 @@
+
+### Insert Multiple Documents
+> db.collection1.insert([{"Cust_Id":"A123","Amount":250,"Status":"A"},{"Cust_Id":"A123","Amount":500,"Status":"A"},{"Cust_Id":"B123","Amount":500,"Status":"B"}])
+BulkWriteResult({
+        "writeErrors" : [ ],
+        "writeConcernErrors" : [ ],
+        "nInserted" : 3,
+        "nUpserted" : 0,
+        "nMatched" : 0,
+        "nModified" : 0,
+        "nRemoved" : 0,
+        "upserted" : [ ]
+})
+> db.collection1.find().pretty()
+{
+        "_id" : ObjectId("5d8f392f048726ac7e6a8389"),
+        "Cust_Id" : "A123",
+        "Amount" : 250,
+        "Status" : "A"
+}
+{
+        "_id" : ObjectId("5d8f392f048726ac7e6a838a"),
+        "Cust_Id" : "A123",
+        "Amount" : 500,
+        "Status" : "A"
+}
+{
+        "_id" : ObjectId("5d8f392f048726ac7e6a838b"),
+        "Cust_Id" : "B123",
+        "Amount" : 500,
+        "Status" : "B"
+}
+
+### Use of mapReduce()
+
+> db.collection2.insert([{"Post":"India is my Country.","Usernme":"Piyush","Status":"Active"},{"Post":"All Indians are my Brothers and Sisters.","Username":"Shreyas","Status":"Active"},{"Post":"India is my Country.","Username":"Jagruti","Status":"Active"}])
+BulkWriteResult({
+        "writeErrors" : [ ],
+        "writeConcernErrors" : [ ],
+        "nInserted" : 3,
+        "nUpserted" : 0,
+        "nMatched" : 0,
+        "nModified" : 0,
+        "nRemoved" : 0,
+        "upserted" : [ ]
+})
+> db.collection2.mapReduce(function(){emit(this.Username,1);},function(key,values){return Array.sum(values)},{query:{Status:"Active"},out:"order2"})
+{
+        "result" : "order2",
+        "timeMillis" : 332,
+        "counts" : {
+                "input" : 3,
+                "emit" : 3,
+                "reduce" : 0,
+                "output" : 3
+        },
+        "ok" : 1
+}
+> db.order2.find().pretty()
+{ "_id" : null, "value" : 1 }
+{ "_id" : "Jagruti", "value" : 1 }
+{ "_id" : "Shreyas", "value" : 1 }
+>
