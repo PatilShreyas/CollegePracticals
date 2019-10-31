@@ -1,0 +1,521 @@
+/* Program for S‌tring Operations */
+
+#include<stdio.h>
+
+int length(char[]);
+int compare(char[], char[]);
+void reverse(char[]);
+int pallindrome(char[]);
+void display(char[]);
+void copy(char[], char[]);
+void concatenate(char[], char[]);
+int substring(char[], char[]);
+
+char string1[30], string2[30], string3[30];
+
+int main()
+{
+	int choice,ch,len,comp,pal,subcount;
+
+	do{
+		printf("\n===============================================\n");
+		printf("\nMENU");
+		printf("\n1.Accept & Display String 1\n2.Accept & Display String 2");
+		printf("\n\n :OPERATIONS:\n3.Length\n4.Compare\n5.Reverse\n6.Pallindrome\n7.Copy\n8.Concatenate\n9.Substring");
+		printf("\n\n10.Exit");
+
+		printf("\n\nEnter Choice :");
+		scanf("%d",&choice);
+
+		switch(choice){
+			case 1:
+				printf("\nEnter the String 1 :");
+				scanf("%s",string1);
+
+				printf("----------------------------------------");
+				printf("\n\nString 1 :");
+				display(string1);
+				printf("----------------------------------------");
+
+				break;
+			case 2:
+				printf("\nEnter the String 2 :");
+				scanf("%s",string2);
+
+				printf("----------------------------------------");
+				printf("\n\nString 2 :");
+				display(string2);
+				printf("----------------------------------------");
+
+				break;
+
+			case 3:
+				printf("\nWhich String ?(1/2) :");
+				scanf("%d",&ch);
+				if(ch == 1)
+				{
+					len = length(string1);
+				}
+				else if(ch == 2)
+				{
+					len = length(string2);
+				}
+				else
+				{
+					return;
+				}
+
+				printf("\n\nLength = %d",len);
+
+				break;
+
+
+			case 4:
+				comp = compare(string1,string2);
+				if(comp == 0)
+				{
+					printf("\nStrings are equal");
+				}
+				else
+				{
+					printf("\nStrings are not equal");
+				}
+
+				break;
+
+			case 5:
+				printf("\nWhich String ?(1/2) :");
+				scanf("%d",&ch);
+				if(ch == 1)
+				{
+					reverse(string1);
+				}
+				else if(ch == 2)
+				{
+					reverse(string2);
+				}
+				else
+				{
+					return;
+				}
+
+				printf("\n\nReverse = ");
+				display(string3);
+
+				break;
+
+			case 6:
+				printf("\nWhich String ?(1/2) :");
+				scanf("%d",&ch);
+				if(ch == 1)
+				{
+					pal = pallindrome(string1);
+				}
+				else if(ch == 2)
+				{
+					pal = pallindrome(string2);
+				}
+				else
+				{
+					return;
+				}
+
+				if(pal == 0)
+				{
+					printf("\n\nStrings are pallindrome");
+				}
+				else
+				{
+					printf("\n\nStrings are not pallindrome");
+				}
+
+				break;
+
+			case 7:
+				copy(string1,string3);
+				printf("\nString is copied\nCopied String is :");
+				display(string3);
+				break;
+
+			case 8:
+				concatenate(string1,string2);
+				printf("\n\nConcatenated String is :");
+				display(string3);
+				break;
+
+			case 9:
+				printf("\nWhich String ?(1/2) :");
+				scanf("%d",&ch);
+
+				printf("\n\nEnter the Substring :");
+				scanf("%s",string3);
+				if(ch == 1)
+				{
+					subcount = substring(string1,string3);
+				}
+				else if(ch == 2)
+				{
+					subcount = substring(string2,string3);
+				}
+				else
+				{
+					return;
+				}
+
+				printf("\n\nSubstring Count = %d",subcount);
+
+
+		}
+
+	}while(choice != 10);
+}
+/* To calculate Length of a String */
+int length(char string[])
+{
+	int i,length=0;
+	for(i=0; string[i] != '\0'; i++)
+	{
+		length++;
+	}
+	return length;
+}
+
+/* To Compare two strings */
+int compare(char string1[], char string2[])
+{
+	int i,flag=0;
+	for(i=0; string1[i] != '\0' && string2[i] != '\0'; i++)
+	{
+		if(string1[i] != string2[i])
+		{
+			flag = 1;
+			return;
+		}
+	}
+	return flag;
+}
+
+
+/* Reverse of String */
+void reverse(char string[])
+{
+	int i=0,j=0;
+
+	for(i=0; string[i] != '\0'; i++){}
+	i--;
+	for(j=0; i!=-1; j++)
+	{
+		string3[j] = string[i];
+		i--;
+	}
+}
+
+/* Check if Palindrome String*/
+int pallindrome(char string[])
+{
+	reverse(string);
+	return (compare(string,string3));
+}
+
+/* Copy Strings*/
+void copy(char src[], char dest[])
+{
+	int i;
+	for(i=0; src[i] != '\0'; i++)
+	{
+		dest[i] = src[i];
+	}
+}
+
+/* Concatenation of Strings*/
+void concatenate(char string1[], char string2[])
+{
+	int i,j;
+	for(i=0; string1[i] != '\0'; i++)
+	{
+		string3[i] = string1[i];
+	}
+
+	for(j=0; string2[j] != '\0';j++)
+	{
+		string3[i] = string2[j];
+		i++;
+	}
+	string3[i] = '\0';
+}
+
+/* Displays String */
+void display(char string[])
+{
+	int i;
+	printf("\n");
+	for(i=0; string[i] != '\0'; i++)
+	{
+		printf("%c",string[i]);
+	}
+	printf("\n");
+	printf("\n===============================================\n");
+}
+
+/* Substring of String */
+int substring(char string[], char sub[])
+{
+	int i=0,j=0,count=0;
+	while(string[i] != '\0')
+	{
+		if(string[i] == sub[j])
+		{
+			i++;
+			j++;
+
+			if(sub[j] == '\0')
+			{
+				count++;
+				j=0;
+			}
+		}
+		else
+		{
+			i++;
+			j=0;
+		}
+	}
+	return count;
+}
+
+/*
+
+**Output:**
+
+student@student-OptiPlex-330:~/Desktop/Shreyas$ gcc String.c
+student@student-OptiPlex-330:~/Desktop/Shreyas$ ./a.out
+
+===============================================
+
+MENU
+1.Accept & Display String 1
+2.Accept & Display String 2
+
+ :OPERATIONS:
+3.Length
+4.Compare
+5.Reverse
+6.Pallindrome
+7.Copy
+8.Concatenate
+9.Substring
+
+10.Exit
+
+Enter Choice :1
+
+Enter the String 1 :Hello
+----------------------------------------
+
+String 1 :
+Hello
+
+===============================================
+----------------------------------------
+===============================================
+
+MENU
+1.Accept & Display String 1
+2.Accept & Display String 2
+
+ :OPERATIONS:
+3.Length
+4.Compare
+5.Reverse
+6.Pallindrome
+7.Copy
+8.Concatenate
+9.Substring
+
+10.Exit
+
+Enter Choice :2
+
+Enter the String 2 :World
+----------------------------------------
+
+String 2 :
+World
+
+===============================================
+----------------------------------------
+===============================================
+
+MENU
+1.Accept & Display String 1
+2.Accept & Display String 2
+
+ :OPERATIONS:
+3.Length
+4.Compare
+5.Reverse
+6.Pallindrome
+7.Copy
+8.Concatenate
+9.Substring
+
+10.Exit
+
+Enter Choice :3
+
+Which String ?(1/2) :1
+
+
+Length = 5
+===============================================
+
+MENU
+1.Accept & Display String 1
+2.Accept & Display String 2
+
+ :OPERATIONS:
+3.Length
+4.Compare
+5.Reverse
+6.Pallindrome
+7.Copy
+8.Concatenate
+9.Substring
+
+10.Exit
+
+Enter Choice :4
+
+Strings are not equal
+===============================================
+
+MENU
+1.Accept & Display String 1
+2.Accept & Display String 2
+
+ :OPERATIONS:
+3.Length
+4.Compare
+5.Reverse
+6.Pallindrome
+7.Copy
+8.Concatenate
+9.Substring
+
+10.Exit
+
+Enter Choice :5
+
+Which String ?(1/2) :2
+
+
+Reverse =
+dlroW
+
+===============================================
+
+===============================================
+
+MENU
+1.Accept & Display String 1
+2.Accept & Display String 2
+
+ :OPERATIONS:
+3.Length
+4.Compare
+5.Reverse
+6.Pallindrome
+7.Copy
+8.Concatenate
+9.Substring
+
+10.Exit
+
+Enter Choice :6
+
+Which String ?(1/2) :1
+
+
+Strings are not pallindrome
+===============================================
+
+MENU
+1.Accept & Display String 1
+2.Accept & Display String 2
+
+ :OPERATIONS:
+3.Length
+4.Compare
+5.Reverse
+6.Pallindrome
+7.Copy
+8.Concatenate
+9.Substring
+
+10.Exit
+
+Enter Choice :8
+
+
+Concatenated String is :
+HelloWorld
+
+===============================================
+----------------------------------------
+===============================================
+
+MENU
+1.Accept & Display String 1
+2.Accept & Display String 2
+
+ :OPERATIONS:
+3.Length
+4.Compare
+5.Reverse
+6.Pallindrome
+7.Copy
+8.Concatenate
+9.Substring
+
+10.Exit
+
+Enter Choice :9
+
+Which String ?(1/2) :1
+
+
+Enter the Substring :ll
+
+
+Substring Count = 1
+===============================================
+
+MENU
+1.Accept & Display String 1
+2.Accept & Display String 2
+
+ :OPERATIONS:
+3.Length
+4.Compare
+5.Reverse
+6.Pallindrome
+7.Copy
+8.Concatenate
+9.Substring
+
+10.Exit
+
+Enter Choice :7
+
+String is copied
+Copied String is :
+Hello
+
+===============================================
+
+===============================================
+
+
+
+*/
+

@@ -1,0 +1,40 @@
+#include<stdio.h>
+
+void read(int[]);
+void display(int[]);
+
+int main()
+{
+	int matrix[3][3];
+	
+	read(matrix);
+	display(matrix);
+}
+
+void read(int m[3][3])
+{
+	int i,j;
+	printf("\n\nEnter the elements of Matrix :");
+	for(i=0; i<3; i++)
+	{
+		for(j=0; j<3; j++)
+		{
+			scanf("%d",&m[i][j]);
+		}
+	}
+}
+
+
+void display(int m[3][3])
+{
+	int i,j;
+	printf("\n\nMatrix is :");
+	for(i=0; i<3; i++)
+	{
+		printf("\n");
+		for(j=0; j<3; j++)
+		{
+			printf("\t%d",m[i][j]);
+		}
+	}
+}

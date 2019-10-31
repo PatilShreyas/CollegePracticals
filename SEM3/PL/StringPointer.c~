@@ -1,0 +1,546 @@
+/* Program for S‌tring Operations using Pointer*/
+
+#include<stdio.h>
+
+int length(char*);
+int compare(char*, char*);
+void reverse(char*, char*);
+int pallindrome(char*);
+void display(char*);
+void copy(char*, char*);
+void concatenate(char*, char*);
+int substring(char*, char*);
+
+char string1[30], string2[30], string3[30];
+
+int main()
+{
+	int choice,ch,len,comp,pal,subcount;
+	
+	do{
+		printf("\n===============================================\n");
+		printf("\nMENU");
+		printf("\n1.Accept & Display String 1\n2.Accept & Display String 2");
+		printf("\n\n :OPERATIONS:\n3.Length\n4.Compare\n5.Reverse\n6.Pallindrome\n7.Copy\n8.Concatenate\n9.Substring");
+		printf("\n\n10.Exit");
+	
+		printf("\n\nEnter Choice :");
+		scanf("%d",&choice);
+		
+		switch(choice){
+			case 1: 
+				printf("\nEnter the String 1 :");
+				scanf("%s",string1);
+			
+				printf("----------------------------------------");
+				printf("\n\nString 1 :");
+				//display(string1);
+				printf("----------------------------------------");
+				
+				break;
+				
+			case 2: 
+				printf("\nEnter the String 2 :");
+				scanf("%s",string2);
+			
+				printf("----------------------------------------");
+				printf("\n\nString 2 :");
+				//display(string2);
+				printf("----------------------------------------");
+				
+				break;
+					
+			case 3:	
+				printf("\nWhich String ?(1/2) :");
+				scanf("%d",&ch);
+				if(ch == 1)
+				{
+					len = length(string1);
+				}
+				else if(ch == 2)
+				{
+					len = length(string2);
+				}
+				else
+				{
+					return;
+				}
+				
+				printf("\n\nLength = %d",len);
+				
+				break;
+				
+					
+			case 4:	
+				comp = compare(string1,string2);
+				if(comp == 0)
+				{
+					printf("\nStrings are equal");
+				}
+				else
+				{
+					printf("\nStrings are not equal");
+				}
+				
+				break;
+					
+			case 5:   
+				printf("\nWhich String ?(1/2) :");
+				scanf("%d",&ch);
+				if(ch == 1)
+				{
+					reverse(string1,string3);
+				}
+				else if(ch == 2)
+				{
+					reverse(string2, string3);
+				}
+				else
+				{
+					return;
+				}
+				
+				printf("\n\nReverse = ");
+				display(string3);
+
+				break;
+			
+			case 6:
+				printf("\nWhich String ?(1/2) :");
+				scanf("%d",&ch);
+				if(ch == 1)
+				{
+					pal = pallindrome(string1);
+				}
+				else if(ch == 2)
+				{
+					pal = pallindrome(string2);
+				}
+				else
+				{
+					return;
+				}
+				
+				if(pal == 0)
+				{
+					printf("\n\nStrings are pallindrome");
+				}
+				else
+				{
+					printf("\n\nStrings are not pallindrome");
+				}
+				
+				break;
+				
+			case 7:
+				copy(string1,string3);
+				printf("\nString is copied\nCopied String is :");
+				display(string3);
+				break;
+				
+			case 8:
+				concatenate(string1,string2);
+				printf("\n\nConcatenated String is :");
+				display(string3);
+				break;
+				
+			case 9:
+				printf("\nWhich String ?(1/2) :");
+				scanf("%d",&ch);
+				
+				printf("\n\nEnter the Substring :");
+				scanf("%s",string3);
+				if(ch == 1)
+				{
+					subcount = substring(string1,string3);
+				}
+				else if(ch == 2)
+				{
+					subcount = substring(string2,string3);
+				}
+				else
+				{
+					return;
+				}
+				
+				printf("\n\nSubstring Count = %d",subcount);
+				
+			
+		}
+		
+	}while(choice != 10);
+}
+/* To calculate Length of a String */
+int length(char *string)
+{
+	int length=0;
+	while(*string != '\0')
+	{
+		length++;
+		string++;
+	}
+	
+	return length;
+}
+
+/* To Compare two strings */
+int compare(char *string1, char *string2)
+{
+	int i,flag=0;
+	
+	while(*string1 != '\0' && *string2 != '\0')
+	{
+		if(*string1 != *string2)
+		{
+			flag = 1;
+			return;
+		}
+	}
+	return flag;
+}
+
+
+/* Reverse of String */
+void reverse(char *string, char *rev)
+{
+	int c=0;
+	while(*string != '\0')
+	{
+		string++;
+		c++;
+	}
+	string--;
+	
+	while(c != 0)
+	{
+		*rev = *string;
+		string--;
+		rev++;
+		c--;
+	}
+}
+
+/* Check if Palindrome String*/
+int pallindrome(char *string)
+{
+	reverse(string,string3);
+	return (compare(string,string3));
+}
+
+/* Copy Strings*/
+void copy(char *src, char *dest)
+{	
+	while(*src != '\0')
+	{
+		*dest = *src;
+		src++;
+		dest++;
+	}
+}
+
+/* Concatenation of Strings*/
+void concatenate(char *string1, char *string2)
+{
+	char *str = string3;
+	while(*string1 != '\0')
+	{
+		*str = *string1;
+		str++;
+		string1++;
+	}
+	
+	while(*string2 != '\0')
+	{
+		*str = *string2;
+		str++;
+		string2++;
+	}
+	
+	*str = '\0';
+}
+
+/* Displays String */
+void display(char *string)
+{
+	printf("\n");
+	
+	printf("%s",string);
+	
+	printf("\n");
+	printf("\n===============================================\n");
+}
+
+/* Substring of String */
+int substring(char *string, char *sub)
+{
+	int i=0,j=0,count=0;
+	char *tmp = sub;
+	while(*string != '\0')
+	{
+		if(*string == *tmp)
+		{
+			string++;
+			tmp++;
+			
+			if(*tmp == '\0')
+			{
+				tmp = sub;
+				count++;
+			}
+		}
+		else
+		{
+			string++;
+			tmp=sub;
+		}
+	}
+	
+	return count;
+}
+
+/*
+
+**Output:**
+
+student@student-OptiPlex-330:~$ cd Desktop/Shreyas
+student@student-OptiPlex-330:~/Desktop/Shreyas$ gcc StringPointer.c
+student@student-OptiPlex-330:~/Desktop/Shreyas$ ./a.out
+
+===============================================
+
+MENU
+1.Accept & Display String 1
+2.Accept & Display String 2
+
+ :OPERATIONS:
+3.Length
+4.Compare
+5.Reverse
+6.Pallindrome
+7.Copy
+8.Concatenate
+9.Substring
+
+10.Exit
+
+Enter Choice :1
+
+Enter the String 1 :Hello
+----------------------------------------
+
+String 1 :----------------------------------------
+===============================================
+
+MENU
+1.Accept & Display String 1
+2.Accept & Display String 2
+
+ :OPERATIONS:
+3.Length
+4.Compare
+5.Reverse
+6.Pallindrome
+7.Copy
+8.Concatenate
+9.Substring
+
+10.Exit
+
+Enter Choice :2
+
+Enter the String 2 :World
+----------------------------------------
+
+String 2 :----------------------------------------
+===============================================
+
+MENU
+1.Accept & Display String 1
+2.Accept & Display String 2
+
+ :OPERATIONS:
+3.Length
+4.Compare
+5.Reverse
+6.Pallindrome
+7.Copy
+8.Concatenate
+9.Substring
+
+10.Exit
+
+Enter Choice :3
+
+Which String ?(1/2) :1
+
+
+Length = 5
+===============================================
+
+MENU
+1.Accept & Display String 1
+2.Accept & Display String 2
+
+ :OPERATIONS:
+3.Length
+4.Compare
+5.Reverse
+6.Pallindrome
+7.Copy
+8.Concatenate
+9.Substring
+
+10.Exit
+
+Enter Choice :4
+
+Strings are not equal
+===============================================
+
+MENU
+1.Accept & Display String 1
+2.Accept & Display String 2
+
+ :OPERATIONS:
+3.Length
+4.Compare
+5.Reverse
+6.Pallindrome
+7.Copy
+8.Concatenate
+9.Substring
+
+10.Exit
+
+Enter Choice :5
+
+Which String ?(1/2) :2
+
+
+Reverse = 
+dlroW
+
+===============================================
+
+===============================================
+
+MENU
+1.Accept & Display String 1
+2.Accept & Display String 2
+
+ :OPERATIONS:
+3.Length
+4.Compare
+5.Reverse
+6.Pallindrome
+7.Copy
+8.Concatenate
+9.Substring
+
+10.Exit
+
+Enter Choice :6
+
+Which String ?(1/2) :2
+
+
+Strings are not pallindrome
+===============================================
+
+MENU
+1.Accept & Display String 1
+2.Accept & Display String 2
+
+ :OPERATIONS:
+3.Length
+4.Compare
+5.Reverse
+6.Pallindrome
+7.Copy
+8.Concatenate
+9.Substring
+
+10.Exit
+
+Enter Choice :7
+
+String is copied
+Copied String is :
+Hello
+
+===============================================
+
+===============================================
+
+MENU
+1.Accept & Display String 1
+2.Accept & Display String 2
+
+ :OPERATIONS:
+3.Length
+4.Compare
+5.Reverse
+6.Pallindrome
+7.Copy
+8.Concatenate
+9.Substring
+
+10.Exit
+
+Enter Choice :8
+
+
+Concatenated String is :
+HelloWorld
+
+===============================================
+
+===============================================
+
+MENU
+1.Accept & Display String 1
+2.Accept & Display String 2
+
+ :OPERATIONS:
+3.Length
+4.Compare
+5.Reverse
+6.Pallindrome
+7.Copy
+8.Concatenate
+9.Substring
+
+10.Exit
+
+Enter Choice :9
+
+Which String ?(1/2) :2
+
+
+Enter the Substring :l
+
+
+Substring Count = 1
+===============================================
+
+MENU
+1.Accept & Display String 1
+2.Accept & Display String 2
+
+ :OPERATIONS:
+3.Length
+4.Compare
+5.Reverse
+6.Pallindrome
+7.Copy
+8.Concatenate
+9.Substring
+
+10.Exit
+
+Enter Choice :10
+
+
+
+*/
+

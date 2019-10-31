@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>F:\Yash\College Files\PL\Ass6-File.c</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="generator" content="Code::Blocks Exporter plugin" />
+<style type="text/css">
+<!--
+body { color: #000000; background-color: #FFFFFF; }
+.style11 { color: #000000; background-color: #FFFFFF; }
+.style64 { color: #C8C8C8; }
+.style72 { color: #C8C8C8; }
+.style75 { color: #C8C8C8; }
+.style1 { color: #A0A0A0; }
+.style23 { color: #A0A0A0; }
+.style65 { color: #A0A0A0; }
+.style87 { color: #A0A0A0; }
+.style2 { color: #BEBEE6; }
+.style66 { color: #BEBEE6; }
+.style3 { color: #8080FF; font-weight: bold; }
+.style24 { color: #8080FF; font-weight: bold; }
+.style67 { color: #8080FF; font-weight: bold; }
+.style88 { color: #8080FF; font-weight: bold; }
+.style15 { color: #8080FF; font-weight: bold; }
+.style79 { color: #8080FF; font-weight: bold; }
+.style17 { color: #008080; }
+.style81 { color: #008080; }
+.style18 { color: #800000; }
+.style82 { color: #800000; }
+.style4 { color: #F000F0; }
+.style68 { color: #F0C8F0; }
+.style5 { color: #0000A0; font-weight: bold; }
+.style69 { color: #8787C8; font-weight: bold; }
+.style16 { color: #00A000; font-weight: bold; }
+.style80 { color: #9AC89A; font-weight: bold; }
+.style19 { color: #BE00BE; font-weight: bold; }
+.style83 { color: #BE89BE; font-weight: bold; }
+.style6 { color: #0000FF; }
+.style12 { color: #0000FF; }
+.style20 { color: #0000FF; }
+.style70 { color: #BEBEFF; }
+.style76 { color: #BEBEFF; }
+.style7 { color: #E0A000; }
+.style71 { color: #E0CE9F; }
+.style8 { color: #000000; }
+.style9 { color: #00A000; }
+.style73 { color: #84A084; }
+.style10 { color: #FF0000; }
+.style74 { color: #FFC8C8; }
+.style34 { color: #000000; background-color: #80FFFF; font-weight: bold; }
+.style35 { color: #FFFFFF; background-color: #FF0000; font-weight: bold; }
+.style50 { color: #404080; font-style: italic; }
+.style114 { color: #8585AC; font-style: italic; }
+--></style></head>
+<body>
+<pre>
+<code><span style="font: 8pt Courier New;"><span class="body">  1 </span><span class="style9">#include&lt;stdio.h&gt;</span>
+<span class="body">  2  </span><span class="style9">#include&lt;stdlib.h&gt;</span>
+<span class="body">  3  </span><span class="style5">char </span><span class="style11">FILENAME</span><span class="style10">[] = </span><span class="style6">"Student.dat"</span><span class="style10">;</span>
+<span class="body">  4  </span><span class="style5">typedef struct </span><span class="style11">student</span>
+<span class="body">  5  </span><span class="style10">{</span>
+<span class="body">  6      </span><span class="style5">int </span><span class="style11">roll_no</span><span class="style10">;</span>
+<span class="body">  7      </span><span class="style5">char </span><span class="style11">name</span><span class="style10">[</span><span class="style4">30</span><span class="style10">];</span>
+<span class="body">  8      </span><span class="style5">float </span><span class="style11">marks</span><span class="style10">;</span>
+<span class="body">  9  </span><span class="style10">}</span><span class="style11">student</span><span class="style10">;</span>
+<span class="body"> 10  </span>
+<span class="body"> 11  </span><span class="style5">void </span><span class="style11">create</span><span class="style10">(</span><span class="style5">int</span><span class="style10">);</span>
+<span class="body"> 12  </span><span class="style5">void </span><span class="style11">display</span><span class="style10">(</span><span class="style5">int</span><span class="style10">);</span>
+<span class="body"> 13  </span><span class="style5">void </span><span class="style11">insert</span><span class="style10">();</span>
+<span class="body"> 14  </span><span class="style5">int </span><span class="style11">search</span><span class="style10">(</span><span class="style5">int</span><span class="style10">);</span>
+<span class="body"> 15  </span><span class="style5">void </span><span class="style11">modify</span><span class="style10">(</span><span class="style5">int</span><span class="style10">);</span>
+<span class="body"> 16  </span><span class="style5">void delete</span><span class="style10">(</span><span class="style5">int</span><span class="style10">);</span>
+<span class="body"> 17  </span>
+<span class="body"> 18  </span><span class="style11">FILE </span><span class="style10">*</span><span class="style11">fp </span><span class="style10">= </span><span class="style11">NULL</span><span class="style10">;</span>
+<span class="body"> 19  </span>
+<span class="body"> 20  </span><span class="style5">int </span><span class="style11">main</span><span class="style10">()</span>
+<span class="body"> 21  </span><span class="style10">{</span>
+<span class="body"> 22      </span><span class="style5">int </span><span class="style11">ch</span><span class="style10">;</span>
+<span class="body"> 23      </span><span class="style5">int </span><span class="style11">size</span><span class="style10">;</span>
+<span class="body"> 24      </span><span class="style5">int </span><span class="style11">key</span><span class="style10">;</span>
+<span class="body"> 25      </span><span class="style5">int </span><span class="style11">r</span><span class="style10">;</span>
+<span class="body"> 26      </span><span class="style5">do</span>
+<span class="body"> 27      </span><span class="style10">{</span>
+<span class="body"> 28          </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"\n============================="</span><span class="style10">);</span>
+<span class="body"> 29          </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"\nMENU"</span><span class="style10">);</span>
+<span class="body"> 30          </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"\n1.Create Database\n2.Display\n3.Insert\n4.Modify\n5.Delete\n6.Search\n7.Exit"</span><span class="style10">);</span>
+<span class="body"> 31          </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"\n\nEnter Choice :"</span><span class="style10">);</span>
+<span class="body"> 32          </span><span class="style11">scanf</span><span class="style10">(</span><span class="style6">"%d"</span><span class="style10">,&amp;</span><span class="style11">ch</span><span class="style10">);</span>
+<span class="body"> 33  </span>
+<span class="body"> 34          </span><span class="style5">switch</span><span class="style10">(</span><span class="style11">ch</span><span class="style10">)</span>
+<span class="body"> 35          </span><span class="style10">{</span>
+<span class="body"> 36              </span><span class="style5">case </span><span class="style4">1</span><span class="style10">:</span>
+<span class="body"> 37                  </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"\nEnter the Number of Records :"</span><span class="style10">);</span>
+<span class="body"> 38                  </span><span class="style11">scanf</span><span class="style10">(</span><span class="style6">"%d"</span><span class="style10">,&amp;</span><span class="style11">size</span><span class="style10">);</span>
+<span class="body"> 39                  </span><span class="style11">create</span><span class="style10">(</span><span class="style11">size</span><span class="style10">);</span>
+<span class="body"> 40                  </span><span class="style5">break</span><span class="style10">;</span>
+<span class="body"> 41  </span>
+<span class="body"> 42              </span><span class="style5">case </span><span class="style4">2</span><span class="style10">:</span>
+<span class="body"> 43                  </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"\n=========================================="</span><span class="style10">);</span>
+<span class="body"> 44                  </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"\nROLL_NO\t\tNAME\t\tMARKS"</span><span class="style10">);</span>
+<span class="body"> 45                  </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"\n=========================================="</span><span class="style10">);</span>
+<span class="body"> 46                  </span><span class="style11">display</span><span class="style10">(</span><span class="style11">size</span><span class="style10">);</span>
+<span class="body"> 47                  </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"\n=========================================="</span><span class="style10">);</span>
+<span class="body"> 48                  </span><span class="style5">break</span><span class="style10">;</span>
+<span class="body"> 49  </span>
+<span class="body"> 50              </span><span class="style5">case </span><span class="style4">3</span><span class="style10">:</span>
+<span class="body"> 51                  </span><span class="style11">insert</span><span class="style10">();</span>
+<span class="body"> 52                  </span><span class="style5">break</span><span class="style10">;</span>
+<span class="body"> 53  </span>
+<span class="body"> 54              </span><span class="style5">case </span><span class="style4">4</span><span class="style10">:</span>
+<span class="body"> 55                  </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"\nEnter Roll No to Modify :"</span><span class="style10">);</span>
+<span class="body"> 56                  </span><span class="style11">scanf</span><span class="style10">(</span><span class="style6">"%d"</span><span class="style10">,&amp;</span><span class="style11">key</span><span class="style10">);</span>
+<span class="body"> 57                  </span><span class="style11">r </span><span class="style10">= </span><span class="style11">search</span><span class="style10">(</span><span class="style11">key</span><span class="style10">);</span>
+<span class="body"> 58                  </span><span class="style5">if</span><span class="style10">(</span><span class="style11">r </span><span class="style10">== </span><span class="style4">1</span><span class="style10">)</span>
+<span class="body"> 59                      </span><span class="style11">modify</span><span class="style10">(</span><span class="style11">key</span><span class="style10">);</span>
+<span class="body"> 60                  </span><span class="style5">break</span><span class="style10">;</span>
+<span class="body"> 61  </span>
+<span class="body"> 62              </span><span class="style5">case </span><span class="style4">5</span><span class="style10">:</span>
+<span class="body"> 63                  </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"\nEnter Roll No to Delete :"</span><span class="style10">);</span>
+<span class="body"> 64                  </span><span class="style11">scanf</span><span class="style10">(</span><span class="style6">"%d"</span><span class="style10">,&amp;</span><span class="style11">key</span><span class="style10">);</span>
+<span class="body"> 65                  </span><span class="style11">r </span><span class="style10">= </span><span class="style11">search</span><span class="style10">(</span><span class="style11">key</span><span class="style10">);</span>
+<span class="body"> 66                  </span><span class="style5">if</span><span class="style10">(</span><span class="style11">r </span><span class="style10">== </span><span class="style4">1</span><span class="style10">)</span>
+<span class="body"> 67                      </span><span class="style5">delete</span><span class="style10">(</span><span class="style11">key</span><span class="style10">);</span>
+<span class="body"> 68                  </span><span class="style5">break</span><span class="style10">;</span>
+<span class="body"> 69  </span>
+<span class="body"> 70              </span><span class="style5">case </span><span class="style4">6</span><span class="style10">:</span>
+<span class="body"> 71                  </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"\nEnter Roll No to Search :"</span><span class="style10">);</span>
+<span class="body"> 72                  </span><span class="style11">scanf</span><span class="style10">(</span><span class="style6">"%d"</span><span class="style10">,&amp;</span><span class="style11">key</span><span class="style10">);</span>
+<span class="body"> 73                  </span><span class="style11">search</span><span class="style10">(</span><span class="style11">key</span><span class="style10">);</span>
+<span class="body"> 74                  </span><span class="style5">break</span><span class="style10">;</span>
+<span class="body"> 75  </span>
+<span class="body"> 76  </span>
+<span class="body"> 77  </span>
+<span class="body"> 78              </span><span class="style5">case </span><span class="style4">7</span><span class="style10">: </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"\nThank You !!\n"</span><span class="style10">); </span><span class="style5">break</span><span class="style10">;</span>
+<span class="body"> 79          </span><span class="style10">}</span>
+<span class="body"> 80      </span><span class="style10">}</span><span class="style5">while</span><span class="style10">(</span><span class="style11">ch</span><span class="style10">!=</span><span class="style4">7</span><span class="style10">);</span>
+<span class="body"> 81  </span><span class="style10">}</span>
+<span class="body"> 82  </span>
+<span class="body"> 83  </span><span class="style1">/*Function to create data file initially */</span>
+<span class="body"> 84  </span><span class="style5">void </span><span class="style11">create</span><span class="style10">(</span><span class="style5">int </span><span class="style11">size</span><span class="style10">)</span>
+<span class="body"> 85  </span><span class="style10">{</span>
+<span class="body"> 86      </span><span class="style5">int </span><span class="style11">i</span><span class="style10">;</span>
+<span class="body"> 87      </span><span class="style11">student s</span><span class="style10">;</span>
+<span class="body"> 88  </span>
+<span class="body"> 89      </span><span class="style11">fp </span><span class="style10">= </span><span class="style11">fopen</span><span class="style10">(</span><span class="style11">FILENAME</span><span class="style10">, </span><span class="style6">"w"</span><span class="style10">);</span>
+<span class="body"> 90      </span><span class="style5">for</span><span class="style10">(</span><span class="style11">i</span><span class="style10">=</span><span class="style4">0</span><span class="style10">; </span><span class="style11">i</span><span class="style10">&lt;</span><span class="style11">size</span><span class="style10">; </span><span class="style11">i</span><span class="style10">++)</span>
+<span class="body"> 91      </span><span class="style10">{</span>
+<span class="body"> 92          </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"\nEnter Details For Student %d :"</span><span class="style10">,(</span><span class="style11">i</span><span class="style10">+</span><span class="style4">1</span><span class="style10">));</span>
+<span class="body"> 93          </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"\nRoll No :"</span><span class="style10">);</span>
+<span class="body"> 94          </span><span class="style11">scanf</span><span class="style10">(</span><span class="style6">"%d"</span><span class="style10">,&amp;</span><span class="style11">s</span><span class="style10">.</span><span class="style11">roll_no</span><span class="style10">);</span>
+<span class="body"> 95          </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"Name :"</span><span class="style10">);</span>
+<span class="body"> 96          </span><span class="style11">scanf</span><span class="style10">(</span><span class="style6">"%s"</span><span class="style10">,</span><span class="style11">s</span><span class="style10">.</span><span class="style11">name</span><span class="style10">);</span>
+<span class="body"> 97          </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"Marks :"</span><span class="style10">);</span>
+<span class="body"> 98          </span><span class="style11">scanf</span><span class="style10">(</span><span class="style6">"%f"</span><span class="style10">, &amp;</span><span class="style11">s</span><span class="style10">.</span><span class="style11">marks</span><span class="style10">);</span>
+<span class="body"> 99  </span>
+<span class="body">100          </span><span class="style11">fwrite</span><span class="style10">((</span><span class="style5">char </span><span class="style10">*)&amp;</span><span class="style11">s</span><span class="style10">,</span><span class="style5">sizeof</span><span class="style10">(</span><span class="style11">student</span><span class="style10">),</span><span class="style4">1</span><span class="style10">,</span><span class="style11">fp</span><span class="style10">);</span>
+<span class="body">101      </span><span class="style10">}</span>
+<span class="body">102      </span><span class="style11">fclose</span><span class="style10">(</span><span class="style11">fp</span><span class="style10">);</span>
+<span class="body">103  </span><span class="style10">}</span>
+<span class="body">104  </span>
+<span class="body">105  </span><span class="style1">/*Function to display all data from file*/</span>
+<span class="body">106  </span><span class="style5">void </span><span class="style11">display</span><span class="style10">(</span><span class="style5">int </span><span class="style11">size</span><span class="style10">)</span>
+<span class="body">107  </span><span class="style10">{</span>
+<span class="body">108      </span><span class="style11">student s</span><span class="style10">;</span>
+<span class="body">109      </span><span class="style11">fp </span><span class="style10">= </span><span class="style11">fopen</span><span class="style10">(</span><span class="style11">FILENAME</span><span class="style10">,</span><span class="style6">"r"</span><span class="style10">);</span>
+<span class="body">110  </span>
+<span class="body">111      </span><span class="style5">while</span><span class="style10">(</span><span class="style11">fread</span><span class="style10">((</span><span class="style5">char </span><span class="style10">*)&amp;</span><span class="style11">s</span><span class="style10">,</span><span class="style5">sizeof</span><span class="style10">(</span><span class="style11">student</span><span class="style10">),</span><span class="style4">1</span><span class="style10">,</span><span class="style11">fp</span><span class="style10">))</span>
+<span class="body">112      </span><span class="style10">{</span>
+<span class="body">113          </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"\n%d\t\t%s\t\t%0.2f%%"</span><span class="style10">,</span><span class="style11">s</span><span class="style10">.</span><span class="style11">roll_no</span><span class="style10">,</span><span class="style11">s</span><span class="style10">.</span><span class="style11">name</span><span class="style10">,</span><span class="style11">s</span><span class="style10">.</span><span class="style11">marks</span><span class="style10">);</span>
+<span class="body">114      </span><span class="style10">}</span>
+<span class="body">115      </span><span class="style11">fclose</span><span class="style10">(</span><span class="style11">fp</span><span class="style10">);</span>
+<span class="body">116  </span><span class="style10">}</span>
+<span class="body">117  </span>
+<span class="body">118  </span><span class="style1">/*Function to insert data and end of file*/</span>
+<span class="body">119  </span><span class="style5">void </span><span class="style11">insert</span><span class="style10">()</span>
+<span class="body">120  </span><span class="style10">{</span>
+<span class="body">121      </span><span class="style11">student s</span><span class="style10">;</span>
+<span class="body">122  </span>
+<span class="body">123      </span><span class="style11">fp </span><span class="style10">= </span><span class="style11">fopen</span><span class="style10">(</span><span class="style11">FILENAME</span><span class="style10">, </span><span class="style6">"a"</span><span class="style10">);</span>
+<span class="body">124  </span>
+<span class="body">125      </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"\nEnter Details of Student"</span><span class="style10">);</span>
+<span class="body">126      </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"\nRoll No :"</span><span class="style10">);</span>
+<span class="body">127      </span><span class="style11">scanf</span><span class="style10">(</span><span class="style6">"%d"</span><span class="style10">,&amp;</span><span class="style11">s</span><span class="style10">.</span><span class="style11">roll_no</span><span class="style10">);</span>
+<span class="body">128      </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"Name :"</span><span class="style10">);</span>
+<span class="body">129      </span><span class="style11">scanf</span><span class="style10">(</span><span class="style6">"%s"</span><span class="style10">,</span><span class="style11">s</span><span class="style10">.</span><span class="style11">name</span><span class="style10">);</span>
+<span class="body">130      </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"Marks :"</span><span class="style10">);</span>
+<span class="body">131      </span><span class="style11">scanf</span><span class="style10">(</span><span class="style6">"%f"</span><span class="style10">, &amp;</span><span class="style11">s</span><span class="style10">.</span><span class="style11">marks</span><span class="style10">);</span>
+<span class="body">132  </span>
+<span class="body">133      </span><span class="style11">fwrite</span><span class="style10">((</span><span class="style5">char </span><span class="style10">*)&amp;</span><span class="style11">s</span><span class="style10">,</span><span class="style5">sizeof</span><span class="style10">(</span><span class="style11">student</span><span class="style10">),</span><span class="style4">1</span><span class="style10">,</span><span class="style11">fp</span><span class="style10">);</span>
+<span class="body">134  </span>
+<span class="body">135      </span><span class="style11">fclose</span><span class="style10">(</span><span class="style11">fp</span><span class="style10">);</span>
+<span class="body">136  </span><span class="style10">}</span>
+<span class="body">137  </span>
+<span class="body">138  </span><span class="style1">/*To search record using roll_no*/</span>
+<span class="body">139  </span><span class="style5">int </span><span class="style11">search</span><span class="style10">(</span><span class="style5">int </span><span class="style11">key</span><span class="style10">)</span>
+<span class="body">140  </span><span class="style10">{</span>
+<span class="body">141      </span><span class="style11">student s</span><span class="style10">;</span>
+<span class="body">142      </span><span class="style5">int </span><span class="style11">r</span><span class="style10">=-</span><span class="style4">1</span><span class="style10">;</span>
+<span class="body">143      </span><span class="style11">fp </span><span class="style10">= </span><span class="style11">fopen</span><span class="style10">(</span><span class="style11">FILENAME</span><span class="style10">,</span><span class="style6">"r"</span><span class="style10">);</span>
+<span class="body">144      </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"\n=========================================="</span><span class="style10">);</span>
+<span class="body">145      </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"\nROLL_NO\t\tNAME\t\tMARKS"</span><span class="style10">);</span>
+<span class="body">146      </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"\n=========================================="</span><span class="style10">);</span>
+<span class="body">147      </span><span class="style5">while</span><span class="style10">(</span><span class="style11">fread</span><span class="style10">((</span><span class="style5">char </span><span class="style10">*)&amp;</span><span class="style11">s</span><span class="style10">,</span><span class="style5">sizeof</span><span class="style10">(</span><span class="style11">student</span><span class="style10">),</span><span class="style4">1</span><span class="style10">,</span><span class="style11">fp</span><span class="style10">))</span>
+<span class="body">148      </span><span class="style10">{</span>
+<span class="body">149          </span><span class="style5">if</span><span class="style10">(</span><span class="style11">s</span><span class="style10">.</span><span class="style11">roll_no </span><span class="style10">== </span><span class="style11">key</span><span class="style10">)</span>
+<span class="body">150          </span><span class="style10">{</span>
+<span class="body">151              </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"\n%d\t\t%s\t\t%0.2f%%"</span><span class="style10">,</span><span class="style11">s</span><span class="style10">.</span><span class="style11">roll_no</span><span class="style10">,</span><span class="style11">s</span><span class="style10">.</span><span class="style11">name</span><span class="style10">,</span><span class="style11">s</span><span class="style10">.</span><span class="style11">marks</span><span class="style10">);</span>
+<span class="body">152              </span><span class="style11">r</span><span class="style10">=</span><span class="style4">1</span><span class="style10">;</span>
+<span class="body">153          </span><span class="style10">}</span>
+<span class="body">154      </span><span class="style10">}</span>
+<span class="body">155      </span><span class="style5">if</span><span class="style10">(</span><span class="style11">r</span><span class="style10">==-</span><span class="style4">1</span><span class="style10">)</span>
+<span class="body">156      </span><span class="style10">{</span>
+<span class="body">157          </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"\nNO RECORD FOUND"</span><span class="style10">);</span>
+<span class="body">158      </span><span class="style10">}</span>
+<span class="body">159      </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"\n=========================================="</span><span class="style10">);</span>
+<span class="body">160      </span><span class="style11">fclose</span><span class="style10">(</span><span class="style11">fp</span><span class="style10">);</span>
+<span class="body">161      </span><span class="style5">return </span><span class="style11">r</span><span class="style10">;</span>
+<span class="body">162  </span><span class="style10">}</span>
+<span class="body">163  </span>
+<span class="body">164  </span><span class="style1">/*To modify record in file using roll_no*/</span>
+<span class="body">165  </span><span class="style5">void </span><span class="style11">modify</span><span class="style10">(</span><span class="style5">int </span><span class="style11">key</span><span class="style10">)</span>
+<span class="body">166  </span><span class="style10">{</span>
+<span class="body">167      </span><span class="style11">student s</span><span class="style10">;</span>
+<span class="body">168      </span><span class="style11">FILE </span><span class="style10">*</span><span class="style11">newFile </span><span class="style10">= </span><span class="style11">fopen</span><span class="style10">(</span><span class="style6">"tmp.tmp"</span><span class="style10">,</span><span class="style6">"w"</span><span class="style10">);</span>
+<span class="body">169      </span><span class="style11">fp </span><span class="style10">= </span><span class="style11">fopen</span><span class="style10">(</span><span class="style11">FILENAME</span><span class="style10">, </span><span class="style6">"r"</span><span class="style10">);</span>
+<span class="body">170      </span><span class="style5">while</span><span class="style10">(</span><span class="style11">fread</span><span class="style10">((</span><span class="style5">char </span><span class="style10">*)&amp;</span><span class="style11">s</span><span class="style10">,</span><span class="style5">sizeof</span><span class="style10">(</span><span class="style11">student</span><span class="style10">),</span><span class="style4">1</span><span class="style10">,</span><span class="style11">fp</span><span class="style10">))</span>
+<span class="body">171      </span><span class="style10">{</span>
+<span class="body">172          </span><span class="style5">if</span><span class="style10">(</span><span class="style11">s</span><span class="style10">.</span><span class="style11">roll_no </span><span class="style10">== </span><span class="style11">key</span><span class="style10">)</span>
+<span class="body">173          </span><span class="style10">{</span>
+<span class="body">174              </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"\nEnter Details of Student"</span><span class="style10">);</span>
+<span class="body">175              </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"\nRoll No :"</span><span class="style10">);</span>
+<span class="body">176              </span><span class="style11">scanf</span><span class="style10">(</span><span class="style6">"%d"</span><span class="style10">,&amp;</span><span class="style11">s</span><span class="style10">.</span><span class="style11">roll_no</span><span class="style10">);</span>
+<span class="body">177              </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"Name :"</span><span class="style10">);</span>
+<span class="body">178              </span><span class="style11">scanf</span><span class="style10">(</span><span class="style6">"%s"</span><span class="style10">,</span><span class="style11">s</span><span class="style10">.</span><span class="style11">name</span><span class="style10">);</span>
+<span class="body">179              </span><span class="style11">printf</span><span class="style10">(</span><span class="style6">"Marks :"</span><span class="style10">);</span>
+<span class="body">180              </span><span class="style11">scanf</span><span class="style10">(</span><span class="style6">"%f"</span><span class="style10">, &amp;</span><span class="style11">s</span><span class="style10">.</span><span class="style11">marks</span><span class="style10">);</span>
+<span class="body">181  </span>
+<span class="body">182              </span><span class="style11">fwrite</span><span class="style10">((</span><span class="style5">char </span><span class="style10">*)&amp;</span><span class="style11">s</span><span class="style10">,</span><span class="style5">sizeof</span><span class="style10">(</span><span class="style11">student</span><span class="style10">),</span><span class="style4">1</span><span class="style10">,</span><span class="style11">newFile</span><span class="style10">);</span>
+<span class="body">183          </span><span class="style10">}</span>
+<span class="body">184          </span><span class="style5">else</span>
+<span class="body">185          </span><span class="style10">{</span>
+<span class="body">186              </span><span class="style11">fwrite</span><span class="style10">((</span><span class="style5">char </span><span class="style10">*)&amp;</span><span class="style11">s</span><span class="style10">,</span><span class="style5">sizeof</span><span class="style10">(</span><span class="style11">student</span><span class="style10">),</span><span class="style4">1</span><span class="style10">,</span><span class="style11">newFile</span><span class="style10">);</span>
+<span class="body">187          </span><span class="style10">}</span>
+<span class="body">188      </span><span class="style10">}</span>
+<span class="body">189      </span><span class="style11">fclose</span><span class="style10">(</span><span class="style11">newFile</span><span class="style10">);</span>
+<span class="body">190      </span><span class="style11">fclose</span><span class="style10">(</span><span class="style11">fp</span><span class="style10">);</span>
+<span class="body">191      </span><span class="style11">remove</span><span class="style10">(</span><span class="style11">FILENAME</span><span class="style10">);</span>
+<span class="body">192      </span><span class="style11">rename</span><span class="style10">(</span><span class="style6">"tmp.tmp"</span><span class="style10">,</span><span class="style11">FILENAME</span><span class="style10">);</span>
+<span class="body">193      </span><span class="style11">remove</span><span class="style10">(</span><span class="style6">"tmp.tmp"</span><span class="style10">);</span>
+<span class="body">194  </span><span class="style10">}</span>
+<span class="body">195  </span>
+<span class="body">196  </span><span class="style1">/*To delete record in file using roll_no*/</span>
+<span class="body">197  </span><span class="style5">void delete</span><span class="style10">(</span><span class="style5">int </span><span class="style11">key</span><span class="style10">)</span>
+<span class="body">198  </span><span class="style10">{</span>
+<span class="body">199      </span><span class="style11">student s</span><span class="style10">;</span>
+<span class="body">200      </span><span class="style11">FILE </span><span class="style10">*</span><span class="style11">newFile </span><span class="style10">= </span><span class="style11">fopen</span><span class="style10">(</span><span class="style6">"tmp.tmp"</span><span class="style10">,</span><span class="style6">"w"</span><span class="style10">);</span>
+<span class="body">201      </span><span class="style11">fp </span><span class="style10">= </span><span class="style11">fopen</span><span class="style10">(</span><span class="style11">FILENAME</span><span class="style10">, </span><span class="style6">"r"</span><span class="style10">);</span>
+<span class="body">202  </span>
+<span class="body">203      </span><span class="style5">while</span><span class="style10">(</span><span class="style11">fread</span><span class="style10">((</span><span class="style5">char </span><span class="style10">*)&amp;</span><span class="style11">s</span><span class="style10">,</span><span class="style5">sizeof</span><span class="style10">(</span><span class="style11">student</span><span class="style10">),</span><span class="style4">1</span><span class="style10">,</span><span class="style11">fp</span><span class="style10">))</span>
+<span class="body">204      </span><span class="style10">{</span>
+<span class="body">205          </span><span class="style5">if</span><span class="style10">(</span><span class="style11">s</span><span class="style10">.</span><span class="style11">roll_no </span><span class="style10">!= </span><span class="style11">key</span><span class="style10">)</span>
+<span class="body">206          </span><span class="style10">{</span>
+<span class="body">207              </span><span class="style11">fwrite</span><span class="style10">((</span><span class="style5">char </span><span class="style10">*)&amp;</span><span class="style11">s</span><span class="style10">,</span><span class="style5">sizeof</span><span class="style10">(</span><span class="style11">student</span><span class="style10">),</span><span class="style4">1</span><span class="style10">,</span><span class="style11">newFile</span><span class="style10">);</span>
+<span class="body">208          </span><span class="style10">}</span>
+<span class="body">209      </span><span class="style10">}</span>
+<span class="body">210      </span><span class="style11">fclose</span><span class="style10">(</span><span class="style11">newFile</span><span class="style10">);</span>
+<span class="body">211      </span><span class="style11">fclose</span><span class="style10">(</span><span class="style11">fp</span><span class="style10">);</span>
+<span class="body">212      </span><span class="style11">remove</span><span class="style10">(</span><span class="style11">FILENAME</span><span class="style10">);</span>
+<span class="body">213      </span><span class="style11">rename</span><span class="style10">(</span><span class="style6">"tmp.tmp"</span><span class="style10">,</span><span class="style11">FILENAME</span><span class="style10">);</span>
+<span class="body">214      </span><span class="style11">remove</span><span class="style10">(</span><span class="style6">"tmp.tmp"</span><span class="style10">);</span>
+<span class="body">215  </span><span class="style10">}</span>
+<span class="body">216  </span>
+<span class="body">217  </span><span class="style1">/*</span>
+<span class="body">218      </span><span class="style1">**OUTPUT**</span>
+<span class="body">219  </span>
+<span class="body">220  </span><span class="style1">student@student-OptiPlex-330:~/Desktop/Shreyas/tmp$ gcc Ass6-File.c</span>
+<span class="body">221  </span><span class="style1">student@student-OptiPlex-330:~/Desktop/Shreyas/tmp$ ./a.out</span>
+<span class="body">222  </span>
+<span class="body">223  </span><span class="style1">=============================</span>
+<span class="body">224  </span><span class="style1">MENU</span>
+<span class="body">225  </span><span class="style1">1.Create Database</span>
+<span class="body">226  </span><span class="style1">2.Display</span>
+<span class="body">227  </span><span class="style1">3.Insert</span>
+<span class="body">228  </span><span class="style1">4.Modify</span>
+<span class="body">229  </span><span class="style1">5.Delete</span>
+<span class="body">230  </span><span class="style1">6.Search</span>
+<span class="body">231  </span><span class="style1">7.Exit</span>
+<span class="body">232  </span>
+<span class="body">233  </span><span class="style1">Enter Choice :1</span>
+<span class="body">234  </span>
+<span class="body">235  </span><span class="style1">Enter the Number of Records :2</span>
+<span class="body">236  </span>
+<span class="body">237  </span><span class="style1">Enter Details For Student 1 :</span>
+<span class="body">238  </span><span class="style1">Roll No :1</span>
+<span class="body">239  </span><span class="style1">Name :Shreyas</span>
+<span class="body">240  </span><span class="style1">Marks :90</span>
+<span class="body">241  </span>
+<span class="body">242  </span><span class="style1">Enter Details For Student 2 :</span>
+<span class="body">243  </span><span class="style1">Roll No :2</span>
+<span class="body">244  </span><span class="style1">Name :Patil</span>
+<span class="body">245  </span><span class="style1">Marks :80</span>
+<span class="body">246  </span>
+<span class="body">247  </span><span class="style1">=============================</span>
+<span class="body">248  </span><span class="style1">MENU</span>
+<span class="body">249  </span><span class="style1">1.Create Database</span>
+<span class="body">250  </span><span class="style1">2.Display</span>
+<span class="body">251  </span><span class="style1">3.Insert</span>
+<span class="body">252  </span><span class="style1">4.Modify</span>
+<span class="body">253  </span><span class="style1">5.Delete</span>
+<span class="body">254  </span><span class="style1">6.Search</span>
+<span class="body">255  </span><span class="style1">7.Exit</span>
+<span class="body">256  </span>
+<span class="body">257  </span><span class="style1">Enter Choice :2</span>
+<span class="body">258  </span>
+<span class="body">259  </span><span class="style1">==========================================</span>
+<span class="body">260  </span><span class="style1">ROLL_NO         NAME            MARKS</span>
+<span class="body">261  </span><span class="style1">==========================================</span>
+<span class="body">262  </span><span class="style1">1               Shreyas         90.00%</span>
+<span class="body">263  </span><span class="style1">2               Patil           80.00%</span>
+<span class="body">264  </span><span class="style1">==========================================</span>
+<span class="body">265  </span><span class="style1">=============================</span>
+<span class="body">266  </span><span class="style1">MENU</span>
+<span class="body">267  </span><span class="style1">1.Create Database</span>
+<span class="body">268  </span><span class="style1">2.Display</span>
+<span class="body">269  </span><span class="style1">3.Insert</span>
+<span class="body">270  </span><span class="style1">4.Modify</span>
+<span class="body">271  </span><span class="style1">5.Delete</span>
+<span class="body">272  </span><span class="style1">6.Search</span>
+<span class="body">273  </span><span class="style1">7.Exit</span>
+<span class="body">274  </span>
+<span class="body">275  </span><span class="style1">Enter Choice :3</span>
+<span class="body">276  </span>
+<span class="body">277  </span><span class="style1">Enter Details of Student</span>
+<span class="body">278  </span><span class="style1">Roll No :3</span>
+<span class="body">279  </span><span class="style1">Name :Ankit</span>
+<span class="body">280  </span><span class="style1">Marks :85</span>
+<span class="body">281  </span>
+<span class="body">282  </span><span class="style1">=============================</span>
+<span class="body">283  </span><span class="style1">MENU</span>
+<span class="body">284  </span><span class="style1">1.Create Database</span>
+<span class="body">285  </span><span class="style1">2.Display</span>
+<span class="body">286  </span><span class="style1">3.Insert</span>
+<span class="body">287  </span><span class="style1">4.Modify</span>
+<span class="body">288  </span><span class="style1">5.Delete</span>
+<span class="body">289  </span><span class="style1">6.Search</span>
+<span class="body">290  </span><span class="style1">7.Exit</span>
+<span class="body">291  </span>
+<span class="body">292  </span><span class="style1">Enter Choice :2</span>
+<span class="body">293  </span>
+<span class="body">294  </span><span class="style1">==========================================</span>
+<span class="body">295  </span><span class="style1">ROLL_NO         NAME            MARKS</span>
+<span class="body">296  </span><span class="style1">==========================================</span>
+<span class="body">297  </span><span class="style1">1               Shreyas         90.00%</span>
+<span class="body">298  </span><span class="style1">2               Patil           80.00%</span>
+<span class="body">299  </span><span class="style1">3               Ankit           85.00%</span>
+<span class="body">300  </span><span class="style1">==========================================</span>
+<span class="body">301  </span><span class="style1">=============================</span>
+<span class="body">302  </span><span class="style1">MENU</span>
+<span class="body">303  </span><span class="style1">1.Create Database</span>
+<span class="body">304  </span><span class="style1">2.Display</span>
+<span class="body">305  </span><span class="style1">3.Insert</span>
+<span class="body">306  </span><span class="style1">4.Modify</span>
+<span class="body">307  </span><span class="style1">5.Delete</span>
+<span class="body">308  </span><span class="style1">6.Search</span>
+<span class="body">309  </span><span class="style1">7.Exit</span>
+<span class="body">310  </span>
+<span class="body">311  </span><span class="style1">Enter Choice :4</span>
+<span class="body">312  </span>
+<span class="body">313  </span><span class="style1">Enter Roll No to Modify :1</span>
+<span class="body">314  </span>
+<span class="body">315  </span><span class="style1">==========================================</span>
+<span class="body">316  </span><span class="style1">ROLL_NO         NAME            MARKS</span>
+<span class="body">317  </span><span class="style1">==========================================</span>
+<span class="body">318  </span><span class="style1">1               Shreyas         90.00%</span>
+<span class="body">319  </span><span class="style1">==========================================</span>
+<span class="body">320  </span><span class="style1">Enter Details of Student</span>
+<span class="body">321  </span><span class="style1">Roll No :1</span>
+<span class="body">322  </span><span class="style1">Name :Shreyas</span>
+<span class="body">323  </span><span class="style1">Marks :100</span>
+<span class="body">324  </span>
+<span class="body">325  </span><span class="style1">=============================</span>
+<span class="body">326  </span><span class="style1">MENU</span>
+<span class="body">327  </span><span class="style1">1.Create Database</span>
+<span class="body">328  </span><span class="style1">2.Display</span>
+<span class="body">329  </span><span class="style1">3.Insert</span>
+<span class="body">330  </span><span class="style1">4.Modify</span>
+<span class="body">331  </span><span class="style1">5.Delete</span>
+<span class="body">332  </span><span class="style1">6.Search</span>
+<span class="body">333  </span><span class="style1">7.Exit</span>
+<span class="body">334  </span>
+<span class="body">335  </span><span class="style1">Enter Choice :2</span>
+<span class="body">336  </span>
+<span class="body">337  </span><span class="style1">==========================================</span>
+<span class="body">338  </span><span class="style1">ROLL_NO         NAME            MARKS</span>
+<span class="body">339  </span><span class="style1">==========================================</span>
+<span class="body">340  </span><span class="style1">1               Shreyas         100.00%</span>
+<span class="body">341  </span><span class="style1">2               Patil           80.00%</span>
+<span class="body">342  </span><span class="style1">3               Ankit           85.00%</span>
+<span class="body">343  </span><span class="style1">==========================================</span>
+<span class="body">344  </span><span class="style1">=============================</span>
+<span class="body">345  </span><span class="style1">MENU</span>
+<span class="body">346  </span><span class="style1">1.Create Database</span>
+<span class="body">347  </span><span class="style1">2.Display</span>
+<span class="body">348  </span><span class="style1">3.Insert</span>
+<span class="body">349  </span><span class="style1">4.Modify</span>
+<span class="body">350  </span><span class="style1">5.Delete</span>
+<span class="body">351  </span><span class="style1">6.Search</span>
+<span class="body">352  </span><span class="style1">7.Exit</span>
+<span class="body">353  </span>
+<span class="body">354  </span><span class="style1">Enter Choice :5</span>
+<span class="body">355  </span>
+<span class="body">356  </span><span class="style1">Enter Roll No to Delete :3</span>
+<span class="body">357  </span>
+<span class="body">358  </span><span class="style1">==========================================</span>
+<span class="body">359  </span><span class="style1">ROLL_NO         NAME            MARKS</span>
+<span class="body">360  </span><span class="style1">==========================================</span>
+<span class="body">361  </span><span class="style1">3               Ankit           85.00%</span>
+<span class="body">362  </span><span class="style1">==========================================</span>
+<span class="body">363  </span><span class="style1">=============================</span>
+<span class="body">364  </span><span class="style1">MENU</span>
+<span class="body">365  </span><span class="style1">1.Create Database</span>
+<span class="body">366  </span><span class="style1">2.Display</span>
+<span class="body">367  </span><span class="style1">3.Insert</span>
+<span class="body">368  </span><span class="style1">4.Modify</span>
+<span class="body">369  </span><span class="style1">5.Delete</span>
+<span class="body">370  </span><span class="style1">6.Search</span>
+<span class="body">371  </span><span class="style1">7.Exit</span>
+<span class="body">372  </span>
+<span class="body">373  </span><span class="style1">Enter Choice :2</span>
+<span class="body">374  </span>
+<span class="body">375  </span><span class="style1">==========================================</span>
+<span class="body">376  </span><span class="style1">ROLL_NO         NAME            MARKS</span>
+<span class="body">377  </span><span class="style1">==========================================</span>
+<span class="body">378  </span><span class="style1">1               Shreyas         100.00%</span>
+<span class="body">379  </span><span class="style1">2               Patil           80.00%</span>
+<span class="body">380  </span><span class="style1">==========================================</span>
+<span class="body">381  </span><span class="style1">=============================</span>
+<span class="body">382  </span><span class="style1">MENU</span>
+<span class="body">383  </span><span class="style1">1.Create Database</span>
+<span class="body">384  </span><span class="style1">2.Display</span>
+<span class="body">385  </span><span class="style1">3.Insert</span>
+<span class="body">386  </span><span class="style1">4.Modify</span>
+<span class="body">387  </span><span class="style1">5.Delete</span>
+<span class="body">388  </span><span class="style1">6.Search</span>
+<span class="body">389  </span><span class="style1">7.Exit</span>
+<span class="body">390  </span>
+<span class="body">391  </span><span class="style1">Enter Choice :5</span>
+<span class="body">392  </span>
+<span class="body">393  </span><span class="style1">Enter Roll No to Delete :2</span>
+<span class="body">394  </span>
+<span class="body">395  </span><span class="style1">==========================================</span>
+<span class="body">396  </span><span class="style1">ROLL_NO         NAME            MARKS</span>
+<span class="body">397  </span><span class="style1">==========================================</span>
+<span class="body">398  </span><span class="style1">2               Patil           80.00%</span>
+<span class="body">399  </span><span class="style1">==========================================</span>
+<span class="body">400  </span><span class="style1">=============================</span>
+<span class="body">401  </span><span class="style1">MENU</span>
+<span class="body">402  </span><span class="style1">1.Create Database</span>
+<span class="body">403  </span><span class="style1">2.Display</span>
+<span class="body">404  </span><span class="style1">3.Insert</span>
+<span class="body">405  </span><span class="style1">4.Modify</span>
+<span class="body">406  </span><span class="style1">5.Delete</span>
+<span class="body">407  </span><span class="style1">6.Search</span>
+<span class="body">408  </span><span class="style1">7.Exit</span>
+<span class="body">409  </span>
+<span class="body">410  </span><span class="style1">Enter Choice :7</span>
+<span class="body">411  </span>
+<span class="body">412  </span><span class="style1">Thank You !!</span>
+<span class="body">413  </span><span class="style1">*/</span></span>
+</code></pre>
+</body>
+</html>
