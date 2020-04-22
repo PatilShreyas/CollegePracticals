@@ -1,0 +1,73 @@
+﻿%{
+int key=0,fun=0,pun=0,s=0,digit=0,var=0;
+%}
+%%
+"#include" {printf("\n\t %s is a preprocessor ",yytext);}
+stdio.h|conio.h|math.h|stdlib.h|graphocs.h {printf("\n\t %s is a header file",yytext);}
+[A-Z|a-z] {printf("\n\t %s is a variable ",yytext);}
+[0-9] {printf("\n\t %s is a digit",yytext);}
+"printf" {printf("\n \t %s is a printing statement",yytext);}
+main|getch {printf("\n\t %s is a function",yytext);}
+void {printf("\n\t %s is a keyword",yytext);}
+[:|;|,|.] {printf("\n\t %s is a puncation mark",yytext);}
+[(|)|{|}] {printf("\n\t %s is abracket",yytext);}
+[<|>] {printf("\n\t %s is a operator",yytext);}
+int|float|char|double {printf("\n\t %s is a acess specifer",yytext);}
+"hello world!!" {printf ("\n\t %s is a statement",yytext);}
+
+%%
+main()
+{
+FILE *fp;
+fp=fopen("ass7.txt","r");
+yyin=fp;
+yylex();
+}
+int yywrap()
+{
+return 1;
+}
+
+
+
+output
+
+
+ lex test1.l
+soumya-OptiPlex-380:~/Desktop$ gcc lex.yy.c
+test1.l:20:1: warning: return type defaults to ‘int’ [-Wimplicit-int]
+ {
+ ^
+stud@stud-OptiPlex-380:~/Desktop$ ./a.out
+
+
+	 #include is a preprocessor 
+	 < is a operator
+	 stdio.h is a header file
+	 > is a operator
+
+
+	 void is a keyword 
+	 main is a function
+	 ( is abracket
+	 ) is abracket
+
+	 { is abracket
+
+ 	 printf is a printing statement
+	 ( is abracket"
+	 h is a variable 
+	 e is a variable 
+	 l is a variable 
+	 l is a variable 
+	 o is a variable  
+	 w is a variable 
+	 o is a variable 
+	 r is a variable 
+	 l is a variable 
+	 d is a variable "
+	 ) is abracket
+	 ; is a puncation mark
+
+	 } is abracket
+

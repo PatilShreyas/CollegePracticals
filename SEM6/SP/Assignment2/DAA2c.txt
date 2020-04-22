@@ -1,0 +1,74 @@
+#include<stdio.h>
+int n,sum=0,psum=0;
+int l[10];
+int rt[10];
+void optimstorage();
+void sortprog();
+int main()
+{
+int i;
+printf("Enter the no. of programs");
+scanf("%d",&n);
+printf("Enter the program length");
+{
+for(i=0;i<n;i++)
+scanf("%d",&l[i]);
+}
+ optimstorage();
+return 0;
+}
+void optimstorage()
+{
+ int i;
+printf("original program length=");
+for(i=0;i<n;i++)
+{
+printf("%d\t",l[i]);
+}
+sortprog();
+printf("sorted program length:");
+for(i=0;i<n;i++)
+{
+printf("%d\t",l[i]);
+}
+for(i=0;i<n;i++)
+{
+ psum=psum+l[i];
+sum=psum+l[i];
+rt[i]=sum;
+}
+printf("\n\n Total retrieval time is%d\n",rt[n-1]);
+printf("mean retrieval time is %f\n",rt[n-1]/(float)n);
+}
+void sortprog()
+{
+ int i,j,temp;
+for(i=0;i<n-1;i++)
+{
+ for(j=0;j<(n-1);j++)
+ { 
+ if(l[j+1]<l[j])
+{
+ temp=l[j];
+l[j]=l[j+1];
+l[j+1]=temp;
+}
+}
+}
+}
+
+
+
+
+
+prashant@prashant-dell:~$ gcc DAA2c.c
+prashant@prashant-dell:~$ ./a.out
+Enter the no. of programs3
+Enter the program length7
+2
+4
+original program length=7	2	4	sorted program length:2	4	7
+
+ Total retrieval time is20
+mean retrieval time is 6.666667
+
