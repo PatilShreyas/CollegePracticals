@@ -13,7 +13,7 @@ int col_1, col_2;
 
 void *on_multiply(void *var)
 {
-    int result = matrix_1[i][k] + matrix_2[k][j];
+    int result = matrix_1[i][k] * matrix_2[k][j];
     pthread_exit((void*) result);
 }
 
