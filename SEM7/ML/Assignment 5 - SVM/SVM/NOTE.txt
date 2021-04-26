@@ -1,0 +1,4 @@
+.ipynb file is jupyter notebook file
+.py file is python file
+
+Follow the INDENTATION of the code or else it gives INDENTATION ERRORS
