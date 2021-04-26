@@ -2,8 +2,7 @@ mydata<-read.csv("pca_dataset.csv")
 attach(mydata)
 
 names(mydata)
-X <- cbind(calory,breakfast,lunch,dinner,exercise,body_shape)
-# mean,median,25th and 75th quartiles, min, max
+X <- mydata[1:10,1:5]
 summary(X)
 
 cor(X)
